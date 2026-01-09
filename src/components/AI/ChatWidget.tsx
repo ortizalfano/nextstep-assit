@@ -1,11 +1,23 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MessageSquare, X, Send, Sparkles, Bot, Paperclip, Minimize2 } from 'lucide-react';
 import { api } from '../../lib/api';
 
-// ... (keep interfaces)
+interface ChatWidgetProps {
+    userRole: 'admin' | 'manager' | 'user';
+}
+
+interface Message {
+    id: number;
+    text: string;
+    sender: 'user' | 'bot';
+    timestamp: string;
+}
 
 export const ChatWidget: React.FC<ChatWidgetProps> = ({ userRole }) => {
     const [isOpen, setIsOpen] = useState(false); // Only for Admin/Manager floating mode
     const [inputValue, setInputValue] = useState('');
-    const [isTyping, setIsTyping] = useState(false); // New state for typing indicator
+    const [isTyping, setIsTyping] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
         { id: 1, text: "Hi there! I'm Nexty, your AI assistant powered by Gemini. How can I help you today?", sender: 'bot', timestamp: 'Just now' }
     ]);
@@ -56,7 +68,7 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ userRole }) => {
             setMessages(prev => [...prev, botMsg]);
 
         } catch (error) {
-            console.warn("AI API unreachable, using mock.");
+            console.warn("AI API unreachable, using mock.", error);
             // Mock AI Response Fallback
             setTimeout(() => {
                 const botMsg: Message = {
@@ -107,13 +119,22 @@ export const ChatWidget: React.FC<ChatWidgetProps> = ({ userRole }) => {
                         className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
                         <div className={`max-w-[85%] rounded-2xl p-3 text-sm leading-relaxed ${msg.sender === 'user'
-                            ? 'bg-indigo-500 text-white rounded-br-none'
-                            : 'bg-white/5 border border-white/5 text-white/90 rounded-bl-none'
+                                ? 'bg-indigo-500 text-white rounded-br-none'
+                                : 'bg-white/5 border border-white/5 text-white/90 rounded-bl-none'
                             }`}>
                             {msg.text}
                         </div>
                     </motion.div>
                 ))}
+                {isTyping && (
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex justify-start">
+                        <div className="bg-white/5 rounded-2xl rounded-bl-none p-3 flex gap-1">
+                            <span className="w-1.5 h-1.5 bg-white/40 rounded-full animate-bounce" />
+                            <span className="w-1.5 h-1.5 bg-white/40 rounded-full animate-bounce [animation-delay:0.2s]" />
+                            <span className="w-1.5 h-1.5 bg-white/40 rounded-full animate-bounce [animation-delay:0.4s]" />
+                        </div>
+                    </motion.div>
+                )}
                 <div ref={messagesEndRef} />
             </div>
 

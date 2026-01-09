@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, User, MessageCircle, Clock, CheckCircle2, AlertTriangle, FileText, Image, ExternalLink, Bug, Sparkles } from 'lucide-react';
+import { X, Send, MessageCircle, Clock, AlertTriangle, Image, Bug } from 'lucide-react';
 import type { User as UserType } from '../../App';
 
 interface TicketDetailProps {
-    isOpen: boolean;
+    ticket: any; // Using any for now to match TicketList
     onClose: () => void;
-    ticketId: number | null;
-    userRole: UserType['role'];
-    currentUser: UserType;
 }
 
 // Mock Comments Data
@@ -21,7 +18,7 @@ interface Comment {
     isInternal: boolean;
 }
 
-export const TicketDetail: React.FC<TicketDetailProps> = ({ isOpen, onClose, ticketId, userRole, currentUser }) => {
+export const TicketDetail: React.FC<TicketDetailProps> = ({ isOpen, onClose, ticketId, currentUser }) => {
     const [newComment, setNewComment] = useState('');
     const [comments, setComments] = useState<Comment[]>([
         { id: 1, user: 'Alex Manager', role: 'manager', content: 'We are looking into this, thanks for reporting.', time: '2h ago', isInternal: false }

@@ -1,6 +1,7 @@
+```
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ArrowRight, UploadCloud, Image, Link as LinkIcon, X } from 'lucide-react';
+import { Paperclip, X, FileText, Image as ImageIcon } from 'lucide-react';
 
 interface Step3FeatureProps {
     onNext: (data: any) => void;
@@ -57,7 +58,7 @@ export const Step3FeatureEvidence: React.FC<Step3FeatureProps> = ({ onNext, onBa
                             onDragOver={handleDragOver}
                             onDragLeave={handleDragLeave}
                             onDrop={handleDrop}
-                            className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all ${isDragging ? 'border-yellow-400 bg-yellow-400/10' : 'border-white/10 hover:border-white/20 bg-black/20'}`}
+                            className={`border - 2 border - dashed rounded - 2xl p - 8 text - center transition - all ${ isDragging ? 'border-yellow-400 bg-yellow-400/10' : 'border-white/10 hover:border-white/20 bg-black/20' } `}
                         >
                             <div className="flex justify-center mb-4">
                                 <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center">

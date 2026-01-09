@@ -139,7 +139,6 @@ export const TicketList: React.FC<TicketListProps> = ({ user }) => {
                 isOpen={!!selectedTicketId}
                 ticketId={selectedTicketId}
                 onClose={() => setSelectedTicketId(null)}
-                userRole={user.role}
                 currentUser={user}
             />
         </>

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Settings, Upload, FileText, CheckCircle2, AlertCircle, Eye, EyeOff, Save } from 'lucide-react';
+import { useState } from 'react';
+import { Settings, Upload, FileText, CheckCircle2, Eye, EyeOff, Save } from 'lucide-react';
 
 export const KnowledgeBase = () => {
     // State for API Key
@@ -9,7 +8,8 @@ export const KnowledgeBase = () => {
     const [isSaved, setIsSaved] = useState(false);
 
     // State for Files
-    const [files, setFiles] = useState<{ name: string; status: 'indexing' | 'ready' | 'error'; size: string }[]>([
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [files] = useState<{ name: string; status: 'indexing' | 'ready' | 'error'; size: string }[]>([
         { name: 'Policy_2024.pdf', status: 'ready', size: '2.4 MB' },
         { name: 'Troubleshooting_Guide_v2.pdf', status: 'indexing', size: '1.1 MB' },
     ]);
@@ -69,8 +69,8 @@ export const KnowledgeBase = () => {
                         <button
                             onClick={handleSaveKey}
                             className={`w-full py-3 rounded-xl font-medium text-sm flex items-center justify-center gap-2 transition-all ${isSaved
-                                    ? 'bg-mint-green text-[#1A2B3C]'
-                                    : 'bg-indigo-500 hover:bg-indigo-400 text-white shadow-lg shadow-indigo-500/20'
+                                ? 'bg-mint-green text-[#1A2B3C]'
+                                : 'bg-indigo-500 hover:bg-indigo-400 text-white shadow-lg shadow-indigo-500/20'
                                 }`}
                         >
                             {isSaved ? <CheckCircle2 size={16} /> : <Save size={16} />}

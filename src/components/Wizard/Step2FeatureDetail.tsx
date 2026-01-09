@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ArrowRight, AlertCircle, Lightbulb, Target, TrendingUp } from 'lucide-react';
+import { ArrowLeft, ArrowRight, AlertCircle, Lightbulb, Target, Users, Zap, Shield, HelpCircle } from 'lucide-react';
 
 interface Step2FeatureProps {
     onNext: (data: any) => void;
