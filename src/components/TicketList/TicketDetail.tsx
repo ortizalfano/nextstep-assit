@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, MessageCircle, Clock, AlertTriangle, Image as ImageIcon, Bug, Sparkles } from 'lucide-react';
+import { X, Send, MessageCircle, Clock, AlertTriangle, Bug, Sparkles } from 'lucide-react';
 import type { User as UserType } from '../../App';
 import { api } from '../../lib/api';
 
@@ -108,14 +108,14 @@ export const TicketDetail: React.FC<TicketDetailProps> = ({ isOpen, onClose, tic
 
                             <div className="flex flex-wrap gap-3">
                                 <span className={`px-3 py-1 rounded-full text-xs font-medium border capitalize ${ticket.status === 'new' ? 'bg-blue-400/10 text-blue-400 border-blue-400/20' :
-                                        ticket.status === 'in_progress' ? 'bg-orange-400/10 text-orange-400 border-orange-400/20' :
-                                            'bg-mint-green/10 text-mint-green border-mint-green/20'
+                                    ticket.status === 'in_progress' ? 'bg-orange-400/10 text-orange-400 border-orange-400/20' :
+                                        'bg-mint-green/10 text-mint-green border-mint-green/20'
                                     }`}>
                                     {ticket.status.replace('_', ' ')}
                                 </span>
                                 <span className={`px-3 py-1 rounded-full text-xs font-medium border flex items-center gap-1 capitalize ${ticket.priority === 'critical' ? 'bg-red-500/10 text-red-400 border-red-500/20' :
-                                        ticket.priority === 'high' ? 'bg-orange-500/10 text-orange-500 border-orange-500/20' :
-                                            'bg-white/5 text-white/60 border-white/10'
+                                    ticket.priority === 'high' ? 'bg-orange-500/10 text-orange-500 border-orange-500/20' :
+                                        'bg-white/5 text-white/60 border-white/10'
                                     }`}>
                                     <AlertTriangle size={12} /> {ticket.priority} Priority
                                 </span>

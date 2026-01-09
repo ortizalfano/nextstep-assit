@@ -40,9 +40,8 @@ const MetricCard: React.FC<MetricCardProps> = ({ title, value, change, icon: Ico
 const UserStatRow = ({ name, tickets, avatar }: { name: string, tickets: number, avatar: string }) => (
     <div className="flex items-center justify-between p-3 hover:bg-white/5 rounded-lg transition-colors cursor-pointer">
         <div className="flex items-center gap-3">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-purple-400 flex items-center justify-center text-xs font-bold text-white shadow-lg">
-                {/* Simplified avatar for now, could be image if provided */}
-                {name.charAt(0)}
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-purple-400 flex items-center justify-center text-xs font-bold text-white shadow-lg overflow-hidden">
+                <img src={avatar} alt={name} className="w-full h-full object-cover" />
             </div>
             <div>
                 <p className="text-sm font-medium text-white">{name}</p>
