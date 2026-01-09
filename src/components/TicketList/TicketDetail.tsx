@@ -4,8 +4,10 @@ import { X, Send, MessageCircle, Clock, AlertTriangle, Image, Bug } from 'lucide
 import type { User as UserType } from '../../App';
 
 interface TicketDetailProps {
-    ticket: any; // Using any for now to match TicketList
+    isOpen: boolean;
+    ticketId: number | null;
     onClose: () => void;
+    currentUser: UserType;
 }
 
 // Mock Comments Data
