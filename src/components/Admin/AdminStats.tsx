@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Users, AlertTriangle, CheckCircle2, Clock, Ticket, TrendingUp, BarChart3 } from 'lucide-react';
+import { Users, AlertTriangle, CheckCircle2, Clock, Ticket, TrendingUp, BarChart3, Loader2 } from 'lucide-react';
+import { api } from '../../lib/api';
 
 interface MetricCardProps {
     title: string;
@@ -40,7 +41,8 @@ const UserStatRow = ({ name, tickets, avatar }: { name: string, tickets: number,
     <div className="flex items-center justify-between p-3 hover:bg-white/5 rounded-lg transition-colors cursor-pointer">
         <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-purple-400 flex items-center justify-center text-xs font-bold text-white shadow-lg">
-                {avatar}
+                {/* Simplified avatar for now, could be image if provided */}
+                {name.charAt(0)}
             </div>
             <div>
                 <p className="text-sm font-medium text-white">{name}</p>
@@ -54,38 +56,69 @@ const UserStatRow = ({ name, tickets, avatar }: { name: string, tickets: number,
 );
 
 export const AdminStats = () => {
+    const [stats, setStats] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchStats = async () => {
+            try {
+                const data = await api.admin.stats();
+                setStats(data);
+            } catch (err) {
+                console.error("Failed to fetch admin stats", err);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchStats();
+    }, []);
+
+    if (loading) {
+        return (
+            <div className="w-full flex justify-center py-12">
+                <Loader2 className="animate-spin text-white/40" size={32} />
+            </div>
+        );
+    }
+
+    if (!stats) return null;
+
+    // Helper to calculate percentage for breakdown bars
+    const total = stats.kpi.totalTickets || 1; // avoid division by zero
+    const getPercentage = (count: number) => Math.round((count / total) * 100);
+
     return (
         <div className="w-full space-y-8 mt-8 mb-12">
             {/* Header Metrics */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <MetricCard
                     title="Total Tickets"
-                    value="1,248"
-                    change="+12%"
+                    value={stats.kpi.totalTickets}
+                    change="+0%" // We don't have historical data DB yet
                     icon={Ticket}
                     color="text-blue-400"
                     trend="up"
                 />
                 <MetricCard
                     title="Open Issues"
-                    value="42"
-                    change="-5%"
+                    value={stats.kpi.activeTickets}
+                    change="0%"
                     icon={Clock}
                     color="text-orange-400"
                     trend="down"
                 />
                 <MetricCard
                     title="Critical"
-                    value="3"
-                    change="+1"
+                    value={stats.kpi.criticalTickets}
+                    change="0"
                     icon={AlertTriangle}
                     color="text-red-400"
-                    trend="up" // actually bad, but numerically up
+                    trend="up"
                 />
                 <MetricCard
                     title="Resolved"
-                    value="1,203"
-                    change="+18%"
+                    value={stats.kpi.resolvedTickets}
+                    change="0%"
                     icon={CheckCircle2}
                     color="text-mint-green"
                     trend="up"
@@ -103,10 +136,10 @@ export const AdminStats = () => {
                         <button className="text-xs text-white/40 hover:text-white transition-colors">View All</button>
                     </div>
                     <div className="space-y-2">
-                        <UserStatRow name="Sarah Conners" tickets={12} avatar="SC" />
-                        <UserStatRow name="Mike Ross" tickets={8} avatar="MR" />
-                        <UserStatRow name="Jessica Pearson" tickets={5} avatar="JP" />
-                        <UserStatRow name="Harvey Specter" tickets={4} avatar="HS" />
+                        {stats.topReporters.map((reporter: any, i: number) => (
+                            <UserStatRow key={i} name={reporter.name} tickets={reporter.count} avatar={reporter.avatar} />
+                        ))}
+                        {stats.topReporters.length === 0 && <p className="text-white/40 text-sm">No reporters yet.</p>}
                     </div>
                 </div>
 
@@ -117,46 +150,23 @@ export const AdminStats = () => {
                     </h3>
 
                     <div className="flex-1 flex flex-col justify-center space-y-6">
-                        {/* Custom "Chart" bars */}
-                        <div className="space-y-2">
-                            <div className="flex justify-between text-xs text-white/60 mb-1">
-                                <span>Critical (8%)</span>
-                                <span>3</span>
+                        {/* Custom "Chart" bars - Using urgencyData from API */}
+                        {stats.urgencyData.map((item: any) => (
+                            <div key={item.name} className="space-y-2">
+                                <div className="flex justify-between text-xs text-white/60 mb-1">
+                                    <span>{item.name} ({getPercentage(item.value)}%)</span>
+                                    <span>{item.value}</span>
+                                </div>
+                                <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+                                    <motion.div
+                                        initial={{ width: 0 }}
+                                        animate={{ width: `${getPercentage(item.value)}%` }}
+                                        className="h-full"
+                                        style={{ backgroundColor: item.color }}
+                                    />
+                                </div>
                             </div>
-                            <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                                <motion.div initial={{ width: 0 }} animate={{ width: '8%' }} className="h-full bg-red-500" />
-                            </div>
-                        </div>
-
-                        <div className="space-y-2">
-                            <div className="flex justify-between text-xs text-white/60 mb-1">
-                                <span>High Priority (24%)</span>
-                                <span>12</span>
-                            </div>
-                            <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                                <motion.div initial={{ width: 0 }} animate={{ width: '24%' }} className="h-full bg-orange-500" />
-                            </div>
-                        </div>
-
-                        <div className="space-y-2">
-                            <div className="flex justify-between text-xs text-white/60 mb-1">
-                                <span>Medium (45%)</span>
-                                <span>18</span>
-                            </div>
-                            <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                                <motion.div initial={{ width: 0 }} animate={{ width: '45%' }} className="h-full bg-yellow-400" />
-                            </div>
-                        </div>
-
-                        <div className="space-y-2">
-                            <div className="flex justify-between text-xs text-white/60 mb-1">
-                                <span>Low (23%)</span>
-                                <span>9</span>
-                            </div>
-                            <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
-                                <motion.div initial={{ width: 0 }} animate={{ width: '23%' }} className="h-full bg-blue-400" />
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>
