@@ -60,6 +60,8 @@ export const TicketList: React.FC<TicketListProps> = ({ user }) => {
         }
     };
 
+    const selectedTicket = tickets.find(t => t.id === selectedTicketId);
+
     return (
         <>
             <div className="w-full mt-2 mb-8">
@@ -150,7 +152,7 @@ export const TicketList: React.FC<TicketListProps> = ({ user }) => {
 
             <TicketDetail
                 isOpen={!!selectedTicketId}
-                ticketId={selectedTicketId}
+                ticket={selectedTicket}
                 onClose={() => setSelectedTicketId(null)}
                 currentUser={user}
             />

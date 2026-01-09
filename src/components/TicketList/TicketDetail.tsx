@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, MessageCircle, Clock, AlertTriangle, Image, Bug } from 'lucide-react';
+import { X, Send, MessageCircle, Clock, AlertTriangle, Image as ImageIcon, Bug, Sparkles } from 'lucide-react';
 import type { User as UserType } from '../../App';
+import { api } from '../../lib/api';
 
 interface TicketDetailProps {
     isOpen: boolean;
-    ticketId: number | null;
+    ticket: any; // We pass full ticket object now
     onClose: () => void;
     currentUser: UserType;
 }
 
-// Mock Comments Data
 interface Comment {
     id: number;
     user: string;
@@ -20,27 +20,54 @@ interface Comment {
     isInternal: boolean;
 }
 
-export const TicketDetail: React.FC<TicketDetailProps> = ({ isOpen, onClose, ticketId, currentUser }) => {
+export const TicketDetail: React.FC<TicketDetailProps> = ({ isOpen, onClose, ticket, currentUser }) => {
     const [newComment, setNewComment] = useState('');
-    const [comments, setComments] = useState<Comment[]>([
-        { id: 1, user: 'Alex Manager', role: 'manager', content: 'We are looking into this, thanks for reporting.', time: '2h ago', isInternal: false }
-    ]);
+    const [comments, setComments] = useState<Comment[]>([]);
+    const [loadingComments, setLoadingComments] = useState(false);
 
-    if (!isOpen || !ticketId) return null;
+    useEffect(() => {
+        if (isOpen && ticket) {
+            setLoadingComments(true);
+            api.tickets.comments.list(ticket.id.toString())
+                .then((data: any[]) => {
+                    // Map API comments to UI format
+                    const formattedComments = data.map(c => ({
+                        id: c.id,
+                        user: c.user_name || 'Unknown',
+                        role: c.user_role || 'user',
+                        content: c.content,
+                        time: new Date(c.created_at).toLocaleString(), // Simple formatting
+                        isInternal: false
+                    }));
+                    setComments(formattedComments);
+                })
+                .catch(err => console.error(err))
+                .finally(() => setLoadingComments(false));
+        }
+    }, [isOpen, ticket]);
 
-    const handleSendComment = (e: React.FormEvent) => {
+    if (!isOpen || !ticket) return null;
+
+    const handleSendComment = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!newComment.trim()) return;
 
-        setComments([...comments, {
-            id: Date.now(),
-            user: currentUser.name,
-            role: currentUser.role,
-            content: newComment,
-            time: 'Just now',
-            isInternal: false
-        }]);
-        setNewComment('');
+        try {
+            await api.tickets.comments.create(ticket.id.toString(), newComment, currentUser.id.toString());
+
+            // Refetch or optimistically add
+            setComments([...comments, {
+                id: Date.now(),
+                user: currentUser.name,
+                role: currentUser.role,
+                content: newComment,
+                time: 'Just now',
+                isInternal: false
+            }]);
+            setNewComment('');
+        } catch (err) {
+            console.error("Failed to post comment", err);
+        }
     };
 
     return (
@@ -66,12 +93,12 @@ export const TicketDetail: React.FC<TicketDetailProps> = ({ isOpen, onClose, tic
                         <div className="p-6 border-b border-white/5 sticky top-0 bg-[#1A2B3C]/95 backdrop-blur z-10">
                             <div className="flex justify-between items-start mb-4">
                                 <div className="flex items-center gap-3">
-                                    <div className="p-2 rounded-lg bg-red-500/10 text-red-400 border border-red-500/20">
-                                        <Bug size={20} />
+                                    <div className={`p-2 rounded-lg border flex items-center justify-center ${ticket.type === 'bug' ? 'bg-red-500/10 text-red-400 border-red-500/20' : 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20'}`}>
+                                        {ticket.type === 'bug' ? <Bug size={20} /> : <Sparkles size={20} />}
                                     </div>
                                     <div>
-                                        <h2 className="text-xl font-bold text-white">Login page freezing on Safari</h2>
-                                        <p className="text-sm text-white/40">Ticket #{ticketId}</p>
+                                        <h2 className="text-xl font-bold text-white">{ticket.subject}</h2>
+                                        <p className="text-sm text-white/40">Ticket #{ticket.id} • via {ticket.created_by_name || 'Unknown'}</p>
                                     </div>
                                 </div>
                                 <button onClick={onClose} className="md:hidden text-white/40 hover:text-white">
@@ -80,14 +107,20 @@ export const TicketDetail: React.FC<TicketDetailProps> = ({ isOpen, onClose, tic
                             </div>
 
                             <div className="flex flex-wrap gap-3">
-                                <span className="px-3 py-1 rounded-full text-xs font-medium bg-orange-400/10 text-orange-400 border border-orange-400/20">
-                                    In Progress
+                                <span className={`px-3 py-1 rounded-full text-xs font-medium border capitalize ${ticket.status === 'new' ? 'bg-blue-400/10 text-blue-400 border-blue-400/20' :
+                                        ticket.status === 'in_progress' ? 'bg-orange-400/10 text-orange-400 border-orange-400/20' :
+                                            'bg-mint-green/10 text-mint-green border-mint-green/20'
+                                    }`}>
+                                    {ticket.status.replace('_', ' ')}
                                 </span>
-                                <span className="px-3 py-1 rounded-full text-xs font-medium bg-red-500/10 text-red-400 border border-red-500/20 flex items-center gap-1">
-                                    <AlertTriangle size={12} /> High Priority
+                                <span className={`px-3 py-1 rounded-full text-xs font-medium border flex items-center gap-1 capitalize ${ticket.priority === 'critical' ? 'bg-red-500/10 text-red-400 border-red-500/20' :
+                                        ticket.priority === 'high' ? 'bg-orange-500/10 text-orange-500 border-orange-500/20' :
+                                            'bg-white/5 text-white/60 border-white/10'
+                                    }`}>
+                                    <AlertTriangle size={12} /> {ticket.priority} Priority
                                 </span>
                                 <span className="px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-white/60 border border-white/10 flex items-center gap-1">
-                                    <Clock size={12} /> Daily Frequency
+                                    <Clock size={12} /> {ticket.created_at}
                                 </span>
                             </div>
                         </div>
@@ -96,41 +129,24 @@ export const TicketDetail: React.FC<TicketDetailProps> = ({ isOpen, onClose, tic
                         <div className="p-6 space-y-8">
                             <section>
                                 <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Description</h3>
-                                <p className="text-white/80 leading-relaxed">
-                                    Every time I try to log in using Safari (v15.2), the page freezes after clicking the submit button. Chrome works fine.
+                                <p className="text-white/80 leading-relaxed whitespace-pre-wrap">
+                                    {ticket.description || 'No description provided.'}
                                 </p>
                             </section>
 
-                            <section className="grid grid-cols-2 gap-6">
-                                <div>
-                                    <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Current Behavior</h3>
-                                    <p className="text-white/80 text-sm">Submit button spins forever, no redirect.</p>
-                                </div>
-                                <div>
-                                    <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Expected Behavior</h3>
-                                    <p className="text-white/80 text-sm">Should redirect to Dashboard immediately.</p>
-                                </div>
-                            </section>
+                            {/* Dynamic sections based on ticket data (simplification: assume JSONB fields are parsed or available) */}
+                            {/* For now, just show description as main content */}
 
-                            <section>
-                                <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Steps to Reproduce</h3>
-                                <ol className="list-decimal list-inside space-y-2 text-white/80 text-sm">
-                                    <li>Open Safari Browser</li>
-                                    <li>Go to login page</li>
-                                    <li>Enter credentials</li>
-                                    <li>Click 'Sign In'</li>
-                                </ol>
-                            </section>
-
-                            <section>
-                                <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Attachments</h3>
-                                <div className="flex gap-4">
-                                    <div className="p-3 bg-white/5 rounded-lg border border-white/10 flex items-center gap-3 w-max hover:bg-white/10 cursor-pointer transition-colors">
-                                        <Image size={20} className="text-blue-400" />
-                                        <span className="text-sm text-white">screenshot_error.png</span>
+                            {ticket.steps_to_reproduce && (
+                                <section>
+                                    <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Steps to Reproduce</h3>
+                                    <div className="text-white/80 text-sm whitespace-pre-wrap">
+                                        {/* Since steps_to_reproduce is likely String or JSON in DB, we display it safely */}
+                                        {typeof ticket.steps_to_reproduce === 'string' ? ticket.steps_to_reproduce : JSON.stringify(ticket.steps_to_reproduce, null, 2)}
                                     </div>
-                                </div>
-                            </section>
+                                </section>
+                            )}
+
                         </div>
                     </div>
 
@@ -146,22 +162,28 @@ export const TicketDetail: React.FC<TicketDetailProps> = ({ isOpen, onClose, tic
                         </div>
 
                         <div className="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-4">
-                            {comments.map((comment) => (
-                                <div key={comment.id} className="flex gap-3">
-                                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${comment.role === 'manager' ? 'bg-purple-500/20 text-purple-400' : 'bg-white/10 text-white'}`}>
-                                        {comment.user.charAt(0)}
-                                    </div>
-                                    <div className="flex-1">
-                                        <div className="flex items-baseline justify-between mb-1">
-                                            <span className="text-sm font-medium text-white">{comment.user}</span>
-                                            <span className="text-[10px] text-white/40">{comment.time}</span>
+                            {loadingComments ? (
+                                <p className="text-white/40 text-center text-sm py-4">Loading comments...</p>
+                            ) : comments.length > 0 ? (
+                                comments.map((comment) => (
+                                    <div key={comment.id} className="flex gap-3">
+                                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold ${comment.role === 'manager' || comment.role === 'admin' ? 'bg-purple-500/20 text-purple-400' : 'bg-white/10 text-white'}`}>
+                                            {comment.user.charAt(0)}
                                         </div>
-                                        <div className="bg-white/5 rounded-2xl rounded-tl-none p-3 text-sm text-white/80 border border-white/5">
-                                            {comment.content}
+                                        <div className="flex-1">
+                                            <div className="flex items-baseline justify-between mb-1">
+                                                <span className="text-sm font-medium text-white">{comment.user}</span>
+                                                <span className="text-[10px] text-white/40">{comment.time}</span>
+                                            </div>
+                                            <div className="bg-white/5 rounded-2xl rounded-tl-none p-3 text-sm text-white/80 border border-white/5">
+                                                {comment.content}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))
+                            ) : (
+                                <p className="text-white/20 text-center text-sm py-8">No activity yet. Be the first to comment.</p>
+                            )}
                         </div>
 
                         {/* Comment Input */}
