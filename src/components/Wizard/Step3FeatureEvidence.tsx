@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Paperclip, X, FileText, Image as ImageIcon, UploadCloud, Link as LinkIcon, ArrowLeft, ArrowRight } from 'lucide-react';
+import { X, Image as ImageIcon, Link as LinkIcon, ArrowLeft, ArrowRight } from 'lucide-react';
 
 interface Step3FeatureProps {
     onNext: (data: any) => void;
