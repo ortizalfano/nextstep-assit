@@ -1,7 +1,6 @@
-```
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Paperclip, X, FileText, Image as ImageIcon } from 'lucide-react';
+import { Paperclip, X, FileText, Image as ImageIcon, UploadCloud, Link as LinkIcon, ArrowLeft, ArrowRight } from 'lucide-react';
 
 interface Step3FeatureProps {
     onNext: (data: any) => void;
@@ -58,12 +57,10 @@ export const Step3FeatureEvidence: React.FC<Step3FeatureProps> = ({ onNext, onBa
                             onDragOver={handleDragOver}
                             onDragLeave={handleDragLeave}
                             onDrop={handleDrop}
-                            className={`border - 2 border - dashed rounded - 2xl p - 8 text - center transition - all ${ isDragging ? 'border-yellow-400 bg-yellow-400/10' : 'border-white/10 hover:border-white/20 bg-black/20' } `}
+                            className={`border - 2 border - dashed rounded - 2xl p - 8 text - center transition - all ${isDragging ? 'border-yellow-400 bg-yellow-400/10' : 'border-white/10 hover:border-white/20 bg-black/20'} `}
                         >
-                            <div className="flex justify-center mb-4">
-                                <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center">
-                                    <Image size={32} className="text-white/60" />
-                                </div>
+                            <div className="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center">
+                                <ImageIcon size={32} className="text-white/60" />
                             </div>
                             <p className="text-white font-medium mb-1">Drop your sketch here</p>
                             <p className="text-white/40 text-sm mb-4">or click to browse checks, wireframes, or screenshots</p>
@@ -89,7 +86,7 @@ export const Step3FeatureEvidence: React.FC<Step3FeatureProps> = ({ onNext, onBa
                                     <div key={i} className="flex items-center justify-between p-3 bg-white/5 rounded-xl border border-white/5">
                                         <div className="flex items-center gap-3">
                                             <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                                                <Image size={14} className="text-white/60" />
+                                                <ImageIcon size={14} className="text-white/60" />
                                             </div>
                                             <span className="text-sm text-white/80">{file.name}</span>
                                         </div>
