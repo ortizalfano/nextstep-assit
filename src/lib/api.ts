@@ -5,15 +5,11 @@ const API_BASE = '/api';
 
 export const api = {
     auth: {
-        login: async (email: string) => {
-            // Since we mocked role in Login.tsx before, now we want to actually hit the API.
-            // But for the pure "Auth" flow described in "Login.tsx" where we passed email...
-            // We should ideally send password too. 
-            // For now, we'll send email and a dummy password to our new endpoint.
+        login: async (email: string, password?: string) => {
             const res = await fetch(`${API_BASE}/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password: 'demo-password' })
+                body: JSON.stringify({ email, password: password || 'demo-password' })
             });
             if (!res.ok) throw new Error('Login failed');
             return res.json();

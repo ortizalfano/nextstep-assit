@@ -4,7 +4,7 @@ import { AccountRequestModal } from './AccountRequestModal';
 import { api } from '../../lib/api';
 
 interface RegisterProps {
-    onRegister: () => void;
+    onRegister: (user: any) => void;
     onSwitchToLogin: () => void;
 }
 
@@ -14,8 +14,6 @@ export const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin 
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [showRequestModal, setShowRequestModal] = useState(false);
-
-    // ... inside component ...
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -28,8 +26,8 @@ export const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin 
 
         setIsLoading(true);
         try {
-            await api.auth.register({ name, email, password });
-            onRegister();
+            const result = await api.auth.register({ name, email, password });
+            onRegister(result.user);
         } catch (error: any) {
             console.error('Registration failed:', error);
             alert(`Registration failed: ${error.message || 'Please try again'}`);

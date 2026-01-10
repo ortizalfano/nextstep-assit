@@ -17,19 +17,9 @@ function App() {
   const [user, setUser] = useState<User | null>(null);
   const [authView, setAuthView] = useState<'login' | 'register'>('login');
 
-  // Mock Login - In real app, this comes from API
-  const handleLogin = (email: string) => {
-    // Simulate role based on email for testing
-    let role: User['role'] = 'user';
-    if (email.includes('admin')) role = 'admin';
-    else if (email.includes('manager')) role = 'manager';
-
-    setUser({
-      id: 1,
-      name: 'Test User',
-      email,
-      role
-    });
+  // Handle Login with real User object from API
+  const handleLogin = (userData: User) => {
+    setUser(userData);
   };
 
   const handleLogout = () => {
@@ -47,7 +37,7 @@ function App() {
           />
         ) : (
           <Register
-            onRegister={() => handleLogin('newuser@nextstepfinancial.services')}
+            onRegister={(user) => handleLogin(user)}
             onSwitchToLogin={() => setAuthView('login')}
           />
         )}

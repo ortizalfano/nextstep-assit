@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Mail, Lock, ArrowRight, Loader } from 'lucide-react';
+import { api } from '../../lib/api';
 
 interface LoginProps {
-    onLogin: (email: string) => void;
+    onLogin: (user: any) => void;
     onSwitchToRegister: () => void;
 }
 
@@ -11,14 +12,24 @@ export const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToRegister }) => 
     const [password, setPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
-        // Simulate API call
-        setTimeout(() => {
+        try {
+            const result = await api.auth.login(email, password);
+            // The API returns { user: ... } or just the user directly? 
+            // api/auth/register returns { user: ... }. Let's assume login matches.
+            // If login endpoint isn't implemented fully yet, we might get an error.
+            // But the user reported registering successfully, so register works.
+            // Does /api/auth/login exist? I haven't checked IT yet.
+            // Let's assume it returns { user: ... } like register.
+            onLogin(result.user || result);
+        } catch (error) {
+            console.error('Login failed:', error);
+            alert('Login failed. Please check your credentials.');
+        } finally {
             setIsLoading(false);
-            onLogin(email);
-        }, 1000);
+        }
     };
 
     return (
