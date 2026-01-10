@@ -25,8 +25,15 @@ export const api = {
                 body: JSON.stringify(data)
             });
             if (!res.ok) {
-                const err = await res.json();
-                throw new Error(err.error || 'Registration failed');
+                let errorMessage = 'Registration failed';
+                try {
+                    const err = await res.json();
+                    errorMessage = err.error || errorMessage;
+                } catch {
+                    const text = await res.text();
+                    errorMessage = text || errorMessage;
+                }
+                throw new Error(errorMessage);
             }
             return res.json();
         }
