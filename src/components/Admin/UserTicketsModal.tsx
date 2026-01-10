@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { X, Loader, AlertCircle, FileText, Calendar, CheckCircle, Clock } from 'lucide-react';
+import { X, Loader, AlertCircle, FileText, Calendar } from 'lucide-react';
 import { api } from '../../lib/api';
 
 interface UserTicketsModalProps {

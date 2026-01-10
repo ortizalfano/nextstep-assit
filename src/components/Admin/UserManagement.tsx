@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Plus, Search, Trash2, Edit2, Shield, User as UserIcon, MoreVertical, FileText } from 'lucide-react';
+import { Plus, Search, Trash2, FileText } from 'lucide-react';
 import { api } from '../../lib/api';
 import { CreateUserModal } from './CreateUserModal';
 import { UserTicketsModal } from './UserTicketsModal';
@@ -123,8 +123,8 @@ export const UserManagement: React.FC = () => {
                                                 value={user.role}
                                                 onChange={(e) => handleRoleUpdate(user.id, e.target.value)}
                                                 className={`bg-transparent border-none text-xs font-medium rounded px-2 py-1 cursor-pointer focus:ring-0 ${user.role === 'admin' ? 'text-purple-400 bg-purple-500/10' :
-                                                        user.role === 'manager' ? 'text-blue-400 bg-blue-500/10' :
-                                                            'text-white/60 bg-white/5'
+                                                    user.role === 'manager' ? 'text-blue-400 bg-blue-500/10' :
+                                                        'text-white/60 bg-white/5'
                                                     }`}
                                             >
                                                 <option value="user" className="bg-[#1A2B3C] text-white">User</option>
