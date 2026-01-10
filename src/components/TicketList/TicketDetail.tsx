@@ -137,13 +137,104 @@ export const TicketDetail: React.FC<TicketDetailProps> = ({ isOpen, onClose, tic
                             {/* Dynamic sections based on ticket data (simplification: assume JSONB fields are parsed or available) */}
                             {/* For now, just show description as main content */}
 
+                            {/* Bug Specific Fields */}
+                            {ticket.type === 'bug' && (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {ticket.category && (
+                                        <div className="bg-white/5 rounded-xl p-4 border border-white/5">
+                                            <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-1">Category</h3>
+                                            <p className="text-white text-sm">{ticket.category}</p>
+                                        </div>
+                                    )}
+                                    {ticket.module && (
+                                        <div className="bg-white/5 rounded-xl p-4 border border-white/5">
+                                            <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-1">Module</h3>
+                                            <p className="text-white text-sm">{ticket.module}</p>
+                                        </div>
+                                    )}
+                                    {ticket.frequency && (
+                                        <div className="bg-white/5 rounded-xl p-4 border border-white/5">
+                                            <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-1">Frequency</h3>
+                                            <p className="text-white text-sm">{ticket.frequency}</p>
+                                        </div>
+                                    )}
+                                    {ticket.scope && (
+                                        <div className="bg-white/5 rounded-xl p-4 border border-white/5">
+                                            <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-1">Scope</h3>
+                                            <p className="text-white text-sm">{ticket.scope}</p>
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+
+                            {ticket.current_behavior && (
+                                <section>
+                                    <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Current Behavior</h3>
+                                    <p className="text-white/80 leading-relaxed text-sm bg-red-500/5 p-4 rounded-xl border border-red-500/10 whitespace-pre-wrap">
+                                        {ticket.current_behavior}
+                                    </p>
+                                </section>
+                            )}
+
+                            {ticket.expected_behavior && (
+                                <section>
+                                    <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Expected Behavior</h3>
+                                    <p className="text-white/80 leading-relaxed text-sm bg-mint-green/5 p-4 rounded-xl border border-mint-green/10 whitespace-pre-wrap">
+                                        {ticket.expected_behavior}
+                                    </p>
+                                </section>
+                            )}
+
                             {ticket.steps_to_reproduce && (
                                 <section>
                                     <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Steps to Reproduce</h3>
-                                    <div className="text-white/80 text-sm whitespace-pre-wrap">
-                                        {/* Since steps_to_reproduce is likely String or JSON in DB, we display it safely */}
-                                        {typeof ticket.steps_to_reproduce === 'string' ? ticket.steps_to_reproduce : JSON.stringify(ticket.steps_to_reproduce, null, 2)}
+                                    <div className="text-white/80 text-sm whitespace-pre-wrap bg-white/5 p-4 rounded-xl border border-white/5">
+                                        {typeof ticket.steps_to_reproduce === 'string' ? ticket.steps_to_reproduce : Array.isArray(ticket.steps_to_reproduce) ? ticket.steps_to_reproduce.map((step: string, i: number) => (
+                                            <div key={i} className="flex gap-3 mb-2 last:mb-0">
+                                                <span className="text-white/40 font-mono">{i + 1}.</span>
+                                                <span>{step}</span>
+                                            </div>
+                                        )) : JSON.stringify(ticket.steps_to_reproduce)}
                                     </div>
+                                </section>
+                            )}
+
+                            {/* Feature Specific Fields */}
+                            {ticket.type === 'feature' && (
+                                <>
+                                    {ticket.problem_statement && (
+                                        <section>
+                                            <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Problem Statement</h3>
+                                            <p className="text-white/80 leading-relaxed text-sm whitespace-pre-wrap">
+                                                {ticket.problem_statement}
+                                            </p>
+                                        </section>
+                                    )}
+                                    {ticket.proposed_solution && (
+                                        <section>
+                                            <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Proposed Solution</h3>
+                                            <p className="text-white/80 leading-relaxed text-sm whitespace-pre-wrap">
+                                                {ticket.proposed_solution}
+                                            </p>
+                                        </section>
+                                    )}
+                                    {ticket.business_value && (
+                                        <section>
+                                            <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Business Value</h3>
+                                            <p className="text-white/80 leading-relaxed text-sm whitespace-pre-wrap">
+                                                {ticket.business_value}
+                                            </p>
+                                        </section>
+                                    )}
+                                </>
+                            )}
+
+                            {ticket.example_link && (
+                                <section>
+                                    <h3 className="text-xs font-bold text-white/40 uppercase tracking-wider mb-3">Example Link</h3>
+                                    <a href={ticket.example_link} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 underline text-sm break-all">
+                                        {ticket.example_link}
+                                    </a>
                                 </section>
                             )}
 
