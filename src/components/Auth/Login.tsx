@@ -74,12 +74,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToRegister }) => 
                 </button>
             </form>
 
-            {/* Dev Helper - Remove in production */}
-            <div className="mt-8 p-4 bg-white/5 rounded-xl border border-white/10 text-xs text-white/50 text-center">
-                <p className="uppercase tracking-wider font-bold mb-2 text-mint-green">Dev Mode: Role Testing</p>
-                <p>Login with email containing <span className="text-white">"admin"</span> or <span className="text-white">"manager"</span> to switch roles.</p>
-                <p className="mt-1 opacity-60">e.g. admin@nextstep.com</p>
-            </div>
+
 
             <div className="mt-6 border-t border-white/5 text-center pt-6">
                 <p className="text-white/40 text-sm">
