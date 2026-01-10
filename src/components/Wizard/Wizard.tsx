@@ -33,9 +33,10 @@ type WizardData = {
 interface WizardProps {
     userRole?: 'admin' | 'manager' | 'user';
     onTicketCreated?: () => void;
+    currentUser?: any; // We can import User type if needed, but 'any' avoids circular dep for now or we just use simple shape
 }
 
-export const Wizard: React.FC<WizardProps> = ({ userRole = 'user', onTicketCreated }) => {
+export const Wizard: React.FC<WizardProps> = ({ userRole = 'user', onTicketCreated, currentUser }) => {
     const [step, setStep] = useState(0); // Start at 0
     const [formData, setFormData] = useState<WizardData>({});
 
@@ -107,6 +108,7 @@ export const Wizard: React.FC<WizardProps> = ({ userRole = 'user', onTicketCreat
                             data={formData}
                             onReset={() => { setFormData({}); setStep(0); }}
                             onSuccess={onTicketCreated}
+                            currentUser={currentUser}
                         />
                     )}
                 </motion.div>

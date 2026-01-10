@@ -69,7 +69,7 @@ function App() {
   return (
     <div className="h-screen w-full bg-[#1A2B3C] text-white overflow-hidden font-sans">
       <Dashboard user={user} onLogout={handleLogout} lastUpdate={lastUpdate}>
-        <Wizard userRole={user.role} onTicketCreated={handleTicketCreated} />
+        <Wizard userRole={user.role} onTicketCreated={handleTicketCreated} currentUser={user} />
       </Dashboard>
     </div>
   );

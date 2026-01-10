@@ -8,9 +8,10 @@ interface Step4Props {
     data: any;
     onReset: () => void;
     onSuccess?: () => void;
+    currentUser?: any;
 }
 
-export const Step4Summary: React.FC<Step4Props> = ({ data, onReset, onSuccess }) => {
+export const Step4Summary: React.FC<Step4Props> = ({ data, onReset, onSuccess, currentUser }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
@@ -53,14 +54,15 @@ export const Step4Summary: React.FC<Step4Props> = ({ data, onReset, onSuccess })
                 example_link: data.exampleLink,
 
                 // Created By
-                created_by: data.user?.id
+                created_by: currentUser?.id
             };
 
-            const storedUser = localStorage.getItem('nextstep_user');
-            const userId = data.user?.id || (storedUser ? JSON.parse(storedUser).id : null);
-
-            if (userId) {
-                payload.created_by = userId;
+            // Fallback if currentUser is missing (shouldn't happen with new flow)
+            if (!payload.created_by) {
+                const storedUser = localStorage.getItem('nextstep_user');
+                if (storedUser) {
+                    payload.created_by = JSON.parse(storedUser).id;
+                }
             }
 
             await api.tickets.create(payload);
