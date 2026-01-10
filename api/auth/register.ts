@@ -1,6 +1,6 @@
 
 import { getDb } from '../_db';
-import { users } from '../../src/lib/schema';
+import { users } from '../_schema';
 import { eq } from 'drizzle-orm';
 
 export default async function handler(req: any, res: any) {

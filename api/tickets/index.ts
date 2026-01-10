@@ -1,6 +1,6 @@
 
-import { db } from '../../src/lib/db';
-import { tickets, users } from '../../src/lib/schema';
+import { getDb } from '../../api/_db';
+import { tickets, users } from '../_schema';
 import { eq, desc } from 'drizzle-orm';
 
 export default async function handler(req: any, res: any) {
@@ -10,6 +10,7 @@ export default async function handler(req: any, res: any) {
         const { role, user_id } = req.query;
 
         try {
+            const db = getDb();
             let result;
             if (role === 'admin' || role === 'manager') {
                 // Fetch all tickets with user details
@@ -58,6 +59,7 @@ export default async function handler(req: any, res: any) {
         const { type, priority, subject, description, steps_to_reproduce, files, created_by, status } = req.body;
 
         try {
+            const db = getDb();
             const newTicket = await db.insert(tickets).values({
                 type,
                 priority,
