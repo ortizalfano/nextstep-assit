@@ -27,11 +27,15 @@ export const api = {
             if (!res.ok) {
                 let errorMessage = 'Registration failed';
                 try {
-                    const err = await res.json();
-                    errorMessage = err.error || errorMessage;
-                } catch {
                     const text = await res.text();
-                    errorMessage = text || errorMessage;
+                    try {
+                        const err = JSON.parse(text);
+                        errorMessage = err.error || errorMessage;
+                    } catch {
+                        errorMessage = text || errorMessage;
+                    }
+                } catch (e) {
+                    console.error("Error reading error response", e);
                 }
                 throw new Error(errorMessage);
             }
