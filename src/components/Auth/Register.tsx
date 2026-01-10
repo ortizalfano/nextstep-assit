@@ -30,9 +30,9 @@ export const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin 
         try {
             await api.auth.register({ name, email, password });
             onRegister();
-        } catch (error) {
+        } catch (error: any) {
             console.error('Registration failed:', error);
-            alert('Registration failed. Please try again.');
+            alert(`Registration failed: ${error.message || 'Please try again'}`);
         } finally {
             setIsLoading(false);
         }
