@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { ShieldCheck, LogOut, LayoutDashboard, List, BookOpen } from 'lucide-react';
+import { ShieldCheck, LogOut, LayoutDashboard, List, BookOpen, Users } from 'lucide-react';
 import type { User } from '../App';
 import { TicketList } from './TicketList/TicketList';
 import { AdminStats } from './Admin/AdminStats';
 import { KnowledgeBase } from './Admin/KnowledgeBase';
+import { UserManagement } from './Admin/UserManagement';
 import { ChatWidget } from './AI/ChatWidget';
 
 interface DashboardProps {
@@ -13,9 +14,9 @@ interface DashboardProps {
 }
 
 export const Dashboard: React.FC<DashboardProps> = ({ children, user, onLogout }) => {
-  // 'overview' = Admin Stats, 'tickets' = Ticket List + Wizard, 'knowledge' = AI Training
+  // 'overview' = Admin Stats, 'tickets' = Ticket List + Wizard, 'knowledge' = AI Training, 'users' = User Management
   // Default to 'overview' for admins, 'tickets' for users
-  const [view, setView] = useState<'overview' | 'tickets' | 'knowledge'>(
+  const [view, setView] = useState<'overview' | 'tickets' | 'knowledge' | 'users'>(
     user.role === 'user' ? 'tickets' : 'overview'
   );
 
@@ -56,6 +57,12 @@ export const Dashboard: React.FC<DashboardProps> = ({ children, user, onLogout }
                 <List size={14} /> Tickets
               </button>
               <button
+                onClick={() => setView('users')}
+                className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${view === 'users' ? 'bg-white/10 text-white shadow-sm' : 'text-white/40 hover:text-white'}`}
+              >
+                <Users size={14} /> Users
+              </button>
+              <button
                 onClick={() => setView('knowledge')}
                 className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${view === 'knowledge' ? 'bg-white/10 text-white shadow-sm' : 'text-white/40 hover:text-white'}`}
               >
@@ -86,8 +93,8 @@ export const Dashboard: React.FC<DashboardProps> = ({ children, user, onLogout }
           {/* Content Wrapper */}
           <div className={`w-full max-w-6xl flex flex-col items-center ${view === 'tickets' && isPrivileged ? 'gap-6 mt-4' : 'gap-12 my-auto'}`}>
 
-            {/* Welcome Section - Hide for Admin Ticket View & Knowledge */}
-            {!((view === 'tickets' && isPrivileged) || view === 'knowledge') && (
+            {/* Welcome Section - Hide for Admin Ticket View, Users, & Knowledge */}
+            {!((view === 'tickets' && isPrivileged) || view === 'knowledge' || view === 'users') && (
               <div className="w-full text-left">
                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-2">
                   Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-purple-200">{user.name.split(' ')[0]}</span>
@@ -106,6 +113,13 @@ export const Dashboard: React.FC<DashboardProps> = ({ children, user, onLogout }
             {/* Admin Knowledge Base */}
             {view === 'knowledge' && isPrivileged && (
               <KnowledgeBase />
+            )}
+
+            {/* Admin User Management */}
+            {view === 'users' && isPrivileged && (
+              <div className="w-full h-[600px]">
+                <UserManagement />
+              </div>
             )}
 
             {/* Ticket/Wizard View */}

@@ -38,11 +38,52 @@ export const api = {
             return res.json();
         }
     },
+    users: {
+        list: async () => {
+            const res = await fetch(`${API_BASE}/users`);
+            if (!res.ok) throw new Error('Failed to fetch users');
+            return res.json();
+        },
+        create: async (userData: any) => {
+            const res = await fetch(`${API_BASE}/users`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            });
+            if (!res.ok) {
+                const err = await res.json().catch(() => ({}));
+                throw new Error(err.error || 'Failed to create user');
+            }
+            return res.json();
+        },
+        update: async (id: number, updates: any) => {
+            const res = await fetch(`${API_BASE}/users/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(updates)
+            });
+            if (!res.ok) throw new Error('Failed to update user');
+            return res.json();
+        },
+        delete: async (id: number) => {
+            const res = await fetch(`${API_BASE}/users/${id}`, {
+                method: 'DELETE'
+            });
+            if (!res.ok) throw new Error('Failed to delete user');
+            return res.json();
+        }
+    },
     tickets: {
-        list: async (role: string, userId: string) => {
+        list: async (role: string, userId: string, filterByUserId?: string) => {
             const params = new URLSearchParams();
             if (role) params.append('role', role);
-            if (userId && role !== 'admin' && role !== 'manager') params.append('user_id', userId);
+
+            // Logic: 
+            // If User -> userId param is mandatorily their own ID (usually enforced by backend, here by param)
+            // If Admin -> userId param matches them. filterByUserId is the target they want to view details for.
+
+            const targetUser = filterByUserId || (role !== 'admin' && role !== 'manager' ? userId : null);
+            if (targetUser) params.append('user_id', targetUser);
 
             const res = await fetch(`${API_BASE}/tickets?${params.toString()}`);
             if (!res.ok) throw new Error('Failed to fetch tickets');
