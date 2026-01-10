@@ -28,7 +28,7 @@ export const tickets = pgTable("tickets", {
     module: text("module"),
     frequency: text("frequency"),
     scope: text("scope"),
-    severity: integer("severity"),
+    severity: text("severity"),
     current_behavior: text("current_behavior"),
     expected_behavior: text("expected_behavior"),
     steps_to_reproduce: jsonb("steps_to_reproduce").$type<string[]>(),
@@ -37,7 +37,7 @@ export const tickets = pgTable("tickets", {
     problem_statement: text("problem_statement"),
     proposed_solution: text("proposed_solution"),
     business_value: text("business_value"),
-    priority: integer("priority"),
+    priority: text("priority"),
     example_link: text("example_link"),
 
     // Status

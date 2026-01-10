@@ -1,6 +1,8 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle, RefreshCw, FileText, AlertOctagon, Bug, ClipboardCheck, List, Repeat, Users, Target, TrendingUp, Lightbulb } from 'lucide-react';
+import { api } from '../../lib/api';
 
 interface Step4Props {
     data: any;
@@ -11,13 +13,63 @@ export const Step4Summary: React.FC<Step4Props> = ({ data, onReset }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         setIsSubmitting(true);
-        // Simulate API call
-        setTimeout(() => {
-            setIsSubmitting(false);
+        try {
+            const payload = {
+                type: data.reportType, // 'bug' or 'feature'
+                subject: data.subject,
+                description: data.description || (data.reportType === 'feature' ? data.problemStatement : data.description),
+
+                // Bug fields
+                category: data.category,
+                module: data.module,
+                frequency: data.frequency,
+                scope: data.scope,
+                severity: data.severity ? String(data.severity) : undefined, // Convert to string as schema is now text
+                current_behavior: data.currentBehavior,
+                expected_behavior: data.expectedBehavior,
+                steps_to_reproduce: data.stepsToReproduce,
+
+                // Feature fields
+                problem_statement: data.problemStatement,
+                proposed_solution: data.proposedSolution,
+                business_value: data.businessValue,
+
+                // Priority Mapping
+                // For bugs: Map severity (0-100) to priority string ('low', 'medium', 'high', 'critical')
+                // For features: Use data.priority (0-100) as string
+                priority: data.reportType === 'bug'
+                    ? (
+                        data.severity > 80 ? 'critical' :
+                            data.severity > 50 ? 'high' :
+                                data.severity > 20 ? 'medium' : 'low'
+                    )
+                    : (data.priority ? String(data.priority) : undefined),
+
+                // Common
+                files: data.files ? data.files.map((f: any) => f.name) : [],
+                example_link: data.exampleLink,
+
+                // Created By
+                created_by: data.user?.id
+            };
+
+            const storedUser = localStorage.getItem('nextstep_user');
+            const userId = data.user?.id || (storedUser ? JSON.parse(storedUser).id : null);
+
+            if (userId) {
+                payload.created_by = userId;
+            }
+
+            await api.tickets.create(payload);
             setIsSuccess(true);
-        }, 1500);
+        } catch (error) {
+            console.error('Failed to submit ticket:', error);
+            alert('Failed to submit ticket. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     if (isSuccess) {

@@ -17,6 +17,18 @@ export const api = {
             });
             if (!res.ok) throw new Error('Login failed');
             return res.json();
+        },
+        register: async (data: any) => {
+            const res = await fetch(`${API_BASE}/auth/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            if (!res.ok) {
+                const err = await res.json();
+                throw new Error(err.error || 'Registration failed');
+            }
+            return res.json();
         }
     },
     tickets: {

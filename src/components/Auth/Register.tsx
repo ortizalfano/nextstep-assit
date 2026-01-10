@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { User, Mail, Lock, ArrowRight, Loader } from 'lucide-react';
 import { AccountRequestModal } from './AccountRequestModal';
+import { api } from '../../lib/api';
 
 interface RegisterProps {
     onRegister: () => void;
@@ -14,7 +15,9 @@ export const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin 
     const [isLoading, setIsLoading] = useState(false);
     const [showRequestModal, setShowRequestModal] = useState(false);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    // ... inside component ...
+
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         // Domain Check
@@ -24,11 +27,15 @@ export const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin 
         }
 
         setIsLoading(true);
-        // Simulate API call
-        setTimeout(() => {
-            setIsLoading(false);
+        try {
+            await api.auth.register({ name, email, password });
             onRegister();
-        }, 1000);
+        } catch (error) {
+            console.error('Registration failed:', error);
+            alert('Registration failed. Please try again.');
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
