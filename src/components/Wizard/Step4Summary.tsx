@@ -7,9 +7,10 @@ import { api } from '../../lib/api';
 interface Step4Props {
     data: any;
     onReset: () => void;
+    onSuccess?: () => void;
 }
 
-export const Step4Summary: React.FC<Step4Props> = ({ data, onReset }) => {
+export const Step4Summary: React.FC<Step4Props> = ({ data, onReset, onSuccess }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
@@ -64,6 +65,7 @@ export const Step4Summary: React.FC<Step4Props> = ({ data, onReset }) => {
 
             await api.tickets.create(payload);
             setIsSuccess(true);
+            if (onSuccess) onSuccess();
         } catch (error) {
             console.error('Failed to submit ticket:', error);
             alert('Failed to submit ticket. Please try again.');

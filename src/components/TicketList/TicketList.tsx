@@ -17,9 +17,10 @@ interface Ticket {
 
 interface TicketListProps {
     user: User;
+    refreshTrigger?: number;
 }
 
-export const TicketList: React.FC<TicketListProps> = ({ user }) => {
+export const TicketList: React.FC<TicketListProps> = ({ user, refreshTrigger }) => {
     const [selectedTicketId, setSelectedTicketId] = useState<number | null>(null);
     const [tickets, setTickets] = useState<Ticket[]>([]);
     const [loading, setLoading] = useState(true);
@@ -40,7 +41,7 @@ export const TicketList: React.FC<TicketListProps> = ({ user }) => {
         };
 
         fetchTickets();
-    }, [user.role, user.id]);
+    }, [user.role, user.id, refreshTrigger]);
 
     const getStatusColor = (status: string) => {
         switch (status) {

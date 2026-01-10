@@ -27,6 +27,12 @@ function App() {
     setAuthView('login');
   };
 
+  const [lastUpdate, setLastUpdate] = useState(0);
+
+  const handleTicketCreated = () => {
+    setLastUpdate(Date.now());
+  };
+
   if (!user) {
     return (
       <AuthLayout>
@@ -47,8 +53,8 @@ function App() {
 
   return (
     <div className="h-screen w-full bg-[#1A2B3C] text-white overflow-hidden font-sans">
-      <Dashboard user={user} onLogout={handleLogout}>
-        <Wizard userRole={user.role} />
+      <Dashboard user={user} onLogout={handleLogout} lastUpdate={lastUpdate}>
+        <Wizard userRole={user.role} onTicketCreated={handleTicketCreated} />
       </Dashboard>
     </div>
   );

@@ -11,9 +11,10 @@ interface DashboardProps {
   children: React.ReactNode;
   user: User;
   onLogout: () => void;
+  lastUpdate?: number;
 }
 
-export const Dashboard: React.FC<DashboardProps> = ({ children, user, onLogout }) => {
+export const Dashboard: React.FC<DashboardProps> = ({ children, user, onLogout, lastUpdate }) => {
   // 'overview' = Admin Stats, 'tickets' = Ticket List + Wizard, 'knowledge' = AI Training, 'users' = User Management
   // Default to 'overview' for admins, 'tickets' for users
   const [view, setView] = useState<'overview' | 'tickets' | 'knowledge' | 'users'>(
@@ -131,7 +132,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ children, user, onLogout }
                 </div>
 
                 {/* Ticket List Section */}
-                <TicketList user={user} />
+                <TicketList user={user} refreshTrigger={lastUpdate} />
               </>
             )}
           </div>

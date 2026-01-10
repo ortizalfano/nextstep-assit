@@ -32,9 +32,10 @@ type WizardData = {
 
 interface WizardProps {
     userRole?: 'admin' | 'manager' | 'user';
+    onTicketCreated?: () => void;
 }
 
-export const Wizard: React.FC<WizardProps> = ({ userRole = 'user' }) => {
+export const Wizard: React.FC<WizardProps> = ({ userRole = 'user', onTicketCreated }) => {
     const [step, setStep] = useState(0); // Start at 0
     const [formData, setFormData] = useState<WizardData>({});
 
@@ -102,7 +103,11 @@ export const Wizard: React.FC<WizardProps> = ({ userRole = 'user' }) => {
                         <Step3FeatureEvidence onNext={nextStep} onBack={prevStep} data={formData} />
                     )}
                     {step === 4 && (
-                        <Step4Summary data={formData} onReset={() => { setFormData({}); setStep(0); }} />
+                        <Step4Summary
+                            data={formData}
+                            onReset={() => { setFormData({}); setStep(0); }}
+                            onSuccess={onTicketCreated}
+                        />
                     )}
                 </motion.div>
             </AnimatePresence>
