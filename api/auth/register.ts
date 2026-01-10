@@ -1,5 +1,5 @@
 
-import { db } from '../_db';
+import { getDb } from '../_db';
 import { users } from '../../src/lib/schema';
 import { eq } from 'drizzle-orm';
 
@@ -15,6 +15,8 @@ export default async function handler(req: any, res: any) {
     }
 
     try {
+        const db = getDb();
+
         // Check if user exists
         const existingUser = await db.select().from(users).where(eq(users.email, email));
         if (existingUser.length > 0) {
@@ -22,13 +24,11 @@ export default async function handler(req: any, res: any) {
         }
 
         // Create user
-        // Note: In production we must hash the password. For this MVP we store as is or simple hash.
-        // Since login.ts currently skips password check, this is "safe" for the MVP demo context.
         const newUser = await db.insert(users).values({
             name,
             email,
-            password_hash: password, // Storing plain for MVP as per current login implementation
-            role: 'user', // Default role
+            password_hash: password,
+            role: 'user',
             avatar_url: `https://ui-avatars.com/api/?name=${name}&background=random`
         }).returning();
 
@@ -42,8 +42,8 @@ export default async function handler(req: any, res: any) {
             }
         });
 
-    } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'Internal server error' });
+    } catch (error: any) {
+        console.error('API Error:', error);
+        return res.status(500).json({ error: error.message || 'Internal server error' });
     }
 }
