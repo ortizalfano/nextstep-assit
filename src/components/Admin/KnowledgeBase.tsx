@@ -47,7 +47,11 @@ export const KnowledgeBase = () => {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
             const data = await res.json();
-            setFiles(data);
+            if (Array.isArray(data)) {
+                setFiles(data);
+            } else {
+                setFiles([]);
+            }
         } catch (e) {
             console.error(e);
         } finally {
