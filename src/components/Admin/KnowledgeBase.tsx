@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { Settings, Upload, FileText, CheckCircle2, Eye, EyeOff, Save, Loader, Trash2 } from 'lucide-react';
-import { api } from '../../lib/api';
 
 export const KnowledgeBase = () => {
     // State for API Key
