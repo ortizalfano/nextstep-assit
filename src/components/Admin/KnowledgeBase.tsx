@@ -159,6 +159,9 @@ export const KnowledgeBase = () => {
         }
     };
 
+    // Close Modal Handler
+    const closeScrapeModal = () => setScrapeResult(null);
+
     const handleDeleteFile = async (id: number) => {
         if (!confirm('Are you sure you want to delete this item?')) return;
         try {
