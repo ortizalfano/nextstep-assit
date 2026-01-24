@@ -39,51 +39,140 @@ export default async function handler(req: any, res: any) {
         return res.status(401).json({ error: 'Invalid Token', details: e.message });
     }
 
-    const { url } = req.body;
+    const { url, crawl } = req.body;
     if (!url) return res.status(400).json({ error: 'URL is required' });
 
+    // Configuration
+    const MAX_PAGES = crawl ? 10 : 1;
+    const visited = new Set<string>();
+    const queue = [url];
+    // Helper to get domain safely
+    let domain = '';
     try {
-        // Scrape content using fetch + cheerio
-        console.log(`Scraping URL: ${url}`);
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`Failed to fetch URL: ${response.statusText}`);
+        domain = new URL(url).hostname;
+    } catch {
+        return res.status(400).json({ error: 'Invalid URL' });
+    }
 
-        const html = await response.text();
-        const $ = cheerio.load(html);
+    console.log(`Starting scrape for ${url} (Crawl: ${crawl}, Max: ${MAX_PAGES})`);
 
-        // Extract text (remove scripts, styles, etc.)
-        $('script').remove();
-        $('style').remove();
-        $('nav').remove();
-        $('footer').remove();
+    // Tools setup
+    if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL is not set');
+    const sql = neon(process.env.DATABASE_URL);
+    const db = drizzle(sql, { schema: { documents } });
 
-        // Improve extraction by targeting main content if possible, or body fallback
-        const mainContent = $('main').length ? $('main').text() : $('body').text();
-        // Clean up whitespace
-        const cleanContent = mainContent.replace(/\s\s+/g, ' ').trim();
-        const title = $('title').text() || url;
+    let pagesProcessed = 0;
+    const results = [];
 
-        if (!cleanContent) {
-            throw new Error("No readable text found on page");
+    try {
+        while (queue.length > 0 && pagesProcessed < MAX_PAGES) {
+            const currentUrl = queue.shift();
+            if (!currentUrl || visited.has(currentUrl)) continue;
+
+            visited.add(currentUrl);
+            console.log(`Processing: ${currentUrl}`);
+
+            try {
+                const response = await fetch(currentUrl, {
+                    headers: {
+                        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36'
+                    }
+                });
+
+                if (!response.ok) {
+                    console.warn(`Failed to fetch ${currentUrl}: ${response.status}`);
+                    continue;
+                }
+
+                const contentType = response.headers.get('content-type');
+                if (!contentType || !contentType.includes('text/html')) {
+                    continue;
+                }
+
+                const html = await response.text();
+                const $ = cheerio.load(html);
+
+                // 1. Better Extraction Logic
+                // Remove noise
+                $('script, style, nav, footer, iframe, noscript, .ad, .cookie-banner, .menu, .sidebar').remove();
+
+                // Try to find main content container
+                // Added legacy selectors: .contentbox, .contents, #pagecontenthelp
+                const contentSelectors = ['main', 'article', '#content', '.content', '.documentation', '.markdown-body', '.contentbox', '.contents', '#pagecontenthelp'];
+                let mainText = '';
+
+                for (const selector of contentSelectors) {
+                    const el = $(selector);
+                    if (el.length) {
+                        mainText = el.text();
+                        if (mainText.length > 500) break; // Found a good chunk
+                    }
+                }
+
+                // Fallback to body if no main container found or text is too short
+                if (mainText.length < 200) {
+                    mainText = $('body').text();
+                }
+
+                const cleanContent = mainText.replace(/\s+/g, ' ').trim();
+                const title = $('title').text().trim() || currentUrl;
+
+                if (cleanContent.length > 50) { // Only save if substantial content
+                    results.push({
+                        filename: `${title} [${currentUrl}]`,
+                        content: `URL: ${currentUrl}\nTITLE: ${title}\n\n${cleanContent}`,
+                        status: 'ready',
+                        type: 'url',
+                        url: currentUrl
+                    });
+                    pagesProcessed++;
+                }
+
+                // 2. Discover Links (BFS)
+                if (crawl) {
+                    $('a[href]').each((_, el) => {
+                        const href = $(el).attr('href');
+                        if (href) {
+                            try {
+                                const absoluteUrl = new URL(href, currentUrl).href;
+                                const linkUrlObj = new URL(absoluteUrl);
+
+                                // Only follow internal links
+                                if (linkUrlObj.hostname === domain && !visited.has(absoluteUrl)) {
+                                    // Avoid common generated junk and query params if possible
+                                    // Simplifying for stability
+                                    if (!absoluteUrl.match(/\.(png|jpg|jpeg|gif|pdf|zip|css|js)$/i)) {
+                                        queue.push(absoluteUrl);
+                                    }
+                                }
+                            } catch (e) {
+                                // Ignore invalid URLs
+                            }
+                        }
+                    });
+                }
+
+            } catch (err) {
+                console.error(`Error scraping ${currentUrl}:`, err);
+            }
         }
 
-        // Save to DB
-        if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL is not set');
-        const sql = neon(process.env.DATABASE_URL);
-        const db = drizzle(sql, { schema: { documents } });
+        if (results.length === 0) {
+            throw new Error("No readable text found on page(s)");
+        }
 
-        await db.insert(documents).values({
-            filename: title.substring(0, 255), // Use title as filename
-            content: cleanContent,
-            status: 'ready',
-            type: 'url',
-            url: url
-        });
+        // Batch insert
+        // Note: Drizzle's neondatabase driver might not support simple batch insert with existing connections in some versions,
+        // but sequential insert is fine for <10 items.
+        for (const doc of results) {
+            // Basic conflict check could be added here, but duplicates allowed for now updates
+            await db.insert(documents).values(doc);
+        }
 
-        return res.status(200).json({ success: true, title });
+        return res.status(200).json({ success: true, count: results.length, pages: results.map(r => r.filename) });
 
     } catch (error: any) {
-        console.error('Scrape Error:', error);
+        console.error('Scrape Critical Error:', error);
         return res.status(500).json({ error: error.message });
     }
 }

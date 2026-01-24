@@ -146,14 +146,20 @@ export const KnowledgeBase = () => {
             if (!res.ok) throw new Error('Scrape failed');
 
             const data = await res.json();
-            alert(`Success! Indexed ${data.count} pages.`);
+
+            // Show Success Modal
+            setScrapeResult({
+                success: true,
+                count: data.count || 1,
+                pages: data.pages || []
+            });
 
             setUrlInput('');
             setCrawlSubpages(false);
             await fetchFiles(); // Auto-refresh logic
         } catch (e) {
             console.error(e);
-            alert('Failed to index website. Make sure the URL is accessible.');
+            setScrapeResult({ success: false, error: 'Failed to access website. Please check the URL.' });
         } finally {
             setIsScraping(false);
         }
