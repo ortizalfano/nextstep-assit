@@ -28,9 +28,10 @@ export default async function handler(req: any, res: any) {
     const token = authHeader.split(' ')[1];
     try {
         const { payload } = await jwtVerify(token, new TextEncoder().encode(SECRET_KEY));
-        if (payload.role !== 'admin') return res.status(403).json({ error: 'Forbidden' });
-    } catch {
-        return res.status(401).json({ error: 'Invalid Token' });
+        if (payload.role !== 'admin') return res.status(403).json({ error: 'Forbidden: User is not admin' });
+    } catch (error: any) {
+        console.error("JWT Verification failed:", error.message);
+        return res.status(401).json({ error: 'Invalid Token', details: error.message });
     }
 
     try {
