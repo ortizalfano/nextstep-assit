@@ -52,7 +52,6 @@ export default async function handler(req: any, res: any) {
 
         if (req.method === 'POST') {
             const { apiKey } = req.body;
-            console.log("Saving API Key:", apiKey ? "Received" : "Missing");
 
             if (!apiKey) return res.status(400).json({ error: 'API Key required' });
 
@@ -60,10 +59,8 @@ export default async function handler(req: any, res: any) {
             const existing = await db.select().from(app_config).where(eq(app_config.key, 'gemini_api_key'));
             if (existing.length > 0) {
                 await db.update(app_config).set({ value: apiKey }).where(eq(app_config.key, 'gemini_api_key'));
-                console.log("Updated config");
             } else {
                 await db.insert(app_config).values({ key: 'gemini_api_key', value: apiKey });
-                console.log("Inserted config");
             }
             return res.status(200).json({ success: true });
         }
