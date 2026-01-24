@@ -1,0 +1,2664 @@
+
+<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml"> 
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <!-- setting this to be dynamic <meta name="description" content="Collect! for Credit and Collection - Ultra flexible debt collection software designed for debtcollection agencies, debt management, credit management and available as a trial download" /> -->
+    <meta name="keywords" content="debt collection software,collection agency software,collection software,debt management software,credit management software, collection strategies, financial tracking,document linking, integrated web server, collection management system, credit and collection software,multi-user contact management, batch and ad hoc letter series,data import/export,flexible reporting,web access,client billing,credit bureau reporting" />
+    <meta name="author" content="Comtech Systems Inc." />
+    <meta name="robots" content="index, follow" />
+    
+    <meta name="viewport" content="width=1024" />
+    <link rel="stylesheet" type="text/css" href="/css/collect.org.css" />
+    
+    
+    
+    <style type="text/css">/* 4px spacing between buttons, all same height and top-aligned */
+      /* Everything Else */
+      .socialbutton { padding: 0px 0px 0px 0px; margin: 0px 0px 0px 0px; vertical-align:top; }
+      .sociallink   { padding: 0px 0px 0px 0px; margin: 0px 0px 0px 1px; vertical-align:top; } 
+      .searchbox    { padding: 0px 2px 0px 2px; margin: 0px 4px 0px 0px; height: 23px; vertical-align: top; }
+      .searchbutton { padding: 0px 2px 0px 2px; margin: 0px 1px 0px 0px; height: 25px; vertical-align: top; }    
+      .bannerbar    { }              
+           
+    </style>  
+        
+    <!-- head closed in collect.org.header.html -->
+
+<link rel="canonical" href="https://www.collect.org/cv13/Help/howtousecontactplans.html" />
+
+<meta name="description" content="Collect! Help - How To Use Contact Plans" />
+
+<title>How To Use Contact Plans - Collect! Help</title>
+
+<link rel="stylesheet" type="text/css" media="print" href="/css/help.print.css"/>
+<link rel="stylesheet" type="text/css" media="screen" href="/css/help.css"/>
+<script type="text/javascript" src="help.js" language="javascript"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/collect.org.css" />
+<script type="text/javascript">
+function checkhelpversion() {
+  var filePath = "../../version.TXT";
+  var result = null;
+  var xmlhttp = new XMLHttpRequest();
+  
+  xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) 
+    {
+      result = xmlhttp.responseText;
+      result = result.split(".");
+      result = parseInt(result[0]);
+      
+      var current = window.location.pathname;
+      current = current.split("/");
+      current = current[1].replace(/\D/g,'');
+      current = parseInt(current);
+  
+      if (current < result)
+      {
+        document.getElementById('helpversiontxt').innerHTML = "You are viewing the documentation for Version "+current+". If you would like to view the documentation for Version "+result+", please <a href='https://www.collect.org/cv"+result+"/Help/index.html'>click here</a>.";
+      }
+    }
+  };
+  
+  xmlhttp.open("GET", filePath, true);
+  xmlhttp.send();
+}
+</script>
+    
+  </head><!-- was opened by template-topofpage -->
+  <body>
+    <script type="text/javascript">
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "https://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+      var pageTracker = _gat._getTracker("UA-5355875-3");
+      pageTracker._trackPageview();      
+    </script>
+    
+    
+<div class="bannerlogo">
+
+  <span>
+    <a href="/index.html">
+      <img class="bannerlogo" src="/wp-content/uploads/2019/12/cropped-collect-logo-rgb-175x58.png" height="60" alt="Collect! for Credit and Collections" style="float:left;" /> 
+    </a>
+  </span>
+
+  <div> 
+   
+    <table style="float:right; padding-right:50px; padding-top:5px;"><!-- Use of a table rather than pure CSS is necessary for the navbar to render correctly in IE prior to 9.0 -->
+      <tr>
+        <td style="text-align:right;border:0px;padding:3px 0px 3px 0px;" class="bannermenu"><!-- Top-of-page navbar - might factor this out into its own file and use it on the bottom too -->
+                  
+          <!-- cv13 help folder context -->
+          <a class="bannermenu" href="/cv13/Help/contents.html">Help Contents</a>
+          <a class="bannermenu" href="/cv13/Help/index.html">Help Index</a>
+          <a class="bannermenu" href="/member-center">Member Center</a>   
+          <a class="bannermenu" href="/contact">Contact Us</a>   
+                   
+          &nbsp;&nbsp;
+        </td>
+      </tr>  
+      <tr>    
+        <td style="text-align:right;"> 
+          <table style="padding:0px;margin:0px;border:0px;vertical-align:top;">
+            <tr> 
+              <td style="vertical-align:top"><!-- Search collect.org! using Google -->
+                <table class="bannerbar">
+                  <tr>
+                    <td style="vertical-align:top">
+                      <form method="get" action="https://www.google.com/search">
+                        <input type="text"   name="q"    value="" size="30" maxlength="255" class="searchbox"/>
+                        <select id="sitesearch" name="sitesearch" class="searchbox" >
+                        <!-- cv13 help folder context -->
+                         <option value="collect.org">Entire Site</option>
+                         <option value="collect.org/cv13/Help" selected="selected">Version 13 Documentation</option>
+                         <option value="collect.org/cv12/Help">Version 12 Documentation</option>
+                         <option value="collect.org/cv11/Help">Version 11 Documentation</option>
+                        
+                        </select>
+                        <input type="hidden" id="domains" name="domains" value="collect.org" />
+                        <input type="submit" name="btnG" value="Search" class="searchbutton" style="background:#FFA500;" />
+                      </form>
+                    </td>                  
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>                  
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>   
+    
+        <div id="helpversiontxtdiv" style="padding-bottom:0px;">
+	        <table style="width:100%;">
+        		<tr>
+                	<td id="helpversiontxt"></td>
+                </tr>
+    	    </table>
+        </div>
+    
+    
+    <div id="pagecontenthelp">
+    
+      <table class="indexmaster">
+        <tr class='nb'>    
+          <td id="contenthome" class="content">
+            <a id="home"></a>
+<script type="text/javascript">
+checkhelpversion();
+</script>
+
+<table class="master" cellspacing="0" cellpadding="0">
+<tr><td class="leftbar">
+<center><br /><img src="helpmain.png" alt="Collect! Credit and Collection Software&trade;" /></center>
+<br />
+<table class="leftmenu"><tr><td class="leftmenu">
+&nbsp;
+<span class="sidecellmore" onmouseover="this.className='sidehotmore';"
+onmouseout="this.className='sidecellmore';" onclick="toggleMenu('sidem2',this);">
+<strong>Page Table of Contents</strong></span>
+<div id="sidem2" class="sidemenu">
+<a class="leftmenu" href="#whatisacontactplan">* What Is A Contact Plan?</a>
+<a class="leftmenu" href="#requirements">* Requirements</a>
+<a class="leftmenu" href="#viewingcontactplans">* Viewing Contact Plans</a>
+<a class="leftmenu" href="#importexportcontactplan">* Import/Export Contact Plan</a>
+<a class="leftmenu" href="#contactplanevents">* Contact Plan Events</a>
+<a class="leftmenu" href="#designormodifyacontactplan">* Design Or Modify A Contact Plan</a>
+<a class="leftmenu" href="#contactplanform">* Contact Plan Form</a>
+<a class="leftmenu" href="#eventform">* Event Form</a>
+<a class="leftmenu" href="#selectacontactplanforadebtor">* Select A Contact Plan For A Debtor</a>
+<a class="leftmenu" href="#workinprogress">* Work In Progress</a>
+<a class="leftmenu" href="#batchprocessing">* Batch Processing</a>
+<a class="leftmenu" href="#contactplancaching">* Contact Plan Caching</a>
+<a class="leftmenu" href="#howcollectexecutescontactplansinternally">* How Collect! Executes Contact Plans Internally</a>
+<a class="leftmenu" href="#contactplansamples">* Contact Plan Samples</a>
+<a class="leftmenu" href="#examplesusingcontactplans">* Examples Using Contact Plans</a>
+<a class="leftmenu" href="#summary">* Summary</a>
+</div>
+<span class="sidecellmore" onmouseover="this.className='sidehotmore';"
+onmouseout="this.className='sidecellmore';" onclick="toggleMenu('sidem3',this);">
+<strong>Related 'How To' Tutorials</strong>
+</span>
+<div id="sidem3" class="sidemenu">
+<a class="leftmenu" href="howtomanagecontacts.html">* Manage Contacts</a>
+<a class="leftmenu" href="howtoschedulecontactevents.html">* Schedule Contact Events</a>
+<a class="leftmenu" href="howtomarkcontactsascompletedorinprogressinbatch.html">* Mark Contacts AS Completed Or In Progress In Batch</a>
+<a class="leftmenu" href="howtousecontactplans.html">* Use Contact Plans</a>
+<a class="leftmenu" href="howtoimportcontactplans.html">* Import Contact Plans</a>
+<a class="leftmenu" href="howtoexportcontactplans.html">* Export Contact Plans</a>
+<a class="leftmenu" href="howtobatchprocessusingcontactplans.html">* Batch Process Using Contact Plans</a>
+<a class="leftmenu" href="howtousepromises.html">* Use Promises</a>
+<a class="leftmenu" href="howtopreventusersfromdeletingcontacts.html">* Prevent Users From Deleting Contacts</a>
+<a class="leftmenu" href="howtorunacontactplanonthelastpaymentdateofapaymentplan.html">* Run A Contact Plan On The Last Payment Date Of A Payment Plan</a>
+<a class="leftmenu" href="howtousescheduleifbasedonuserlevelofdebtorcollector.html">* Use Schedule If Based On User Level Of Debtor Collector</a>
+<a class="leftmenu" href="howtoruncontactplansinreportsandcontrolfiles.html">* Run Contact Plans In Reports And Control Files</a>
+<a class="leftmenu" href="howtosetupthewiplist.html">* Setup The WIP List</a>
+<a class="leftmenu" href="howtousethewiplist.html">* Use The WIP List</a>
+<a class="leftmenu" href="howtouseasharedwiplistpooldesks.html">* Use A Shared WIP List / Pool Desks</a>
+<a class="leftmenu" href="howtooptinoroutofphoneoremailrecords.html">* Opt In Or Out Of Phone Or Email Records</a>
+<a class="leftmenu" href="howtousecontactcontrols.html">* Use Contact Controls</a>
+</div>
+</td></tr>
+</table>
+</td>
+<td class="contents">
+<!-- Start body text -->
+<table class="contentbox">
+<tr><td class="contentbox">
+<h2>How To Use Contact Plans</h2>
+<p>
+</p>
+<p>  This document will help you begin to use  <a href="contactplan.html">Contact Plan</a>s to control and manage your Contacts.
+</p>
+
+<a name="whatisacontactplan"></a>
+<h3>What Is A Contact Plan?</h3>
+
+<p>  Manually scheduling  <a href="contact.html">contact</a>s is great, but there are many times when you would have to enter the
+  same contact over and over again because it is a repeating schedule. Other times you may need to
+  enter several contacts to work the account properly. For instance, perhaps a letter, a  <a href="phone.html">phone</a> call
+  and a review are necessary. When you  <a href="selectrecords.html">find</a> that you are repeatedly entering the same contact, or
+  scheduling multiple contacts to perform the work you need done, let Collect! do your work for you
+  with a  <a href="contactplan.html">Contact Plan</a>.
+</p>
+<p>  A Contact Plan is made up of single contacts or  <a href="event.html">event</a>s. When many contacts are used together as a
+  single entity, it is called a Contact Plan. Each component in a Contact Plan is called an Event.
+</p>
+  <ul>
+    <li>An Event can be a letter, a  review, a change in status, posting a  <a href="transaction.html">transaction</a> and many other
+        types of  <a href="contact.html">events</a>.</li>
+    <li>An Event may be scheduled to run immediately or at a predetermined date and time in the
+        future.</li>
+    <li>An Event:
+        <ul>
+          <li>may be assigned to an  <a href="operator.html">operator</a> you specify</li>
+          <li>may have a specific priority</li>
+          <li>may be scheduled to run only if a certain condition is met</li>
+        </ul>
+    </li>
+  </ul>
+
+<p>  The Demonstration database in Collect! contains many samples of contact plans. We will use some of
+  these in the exercises in this document.
+</p>
+<p>
+<img src="tip.gif" border="0" alt="Useful Note" />
+ It is assumed that you meet the following requirements. They are necessary in order to benefit
+         fully from the information in this topic.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="requirements"></a>
+<h3>Requirements</h3>
+
+  <ul>
+    <li>Review help on Contacts, Events, and  <a href="schedulenextcontact.html">Schedule Next Contact</a></li>
+    <li>Review help on  <a href="reports.html">Reports</a> and Letters</li>
+    <li>Plan a Collection Strategy</li>
+    <li>Setup  <a href="client.html">Client</a>s. Debtors and Operators</li>
+  </ul>
+
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="viewingcontactplans"></a>
+<h3>Viewing Contact Plans</h3>
+
+<p>   <a href="contactplan.html">Contact plan</a>s are found by pulling down the System menu and choosing  <a href="contactmanagementsettings.html">Contact Management Settings</a>. A
+  sub-menu offers you the selections -- View Contact Plans, Import Contact Plan and  Export Contact
+  Plan.
+</p>
+<p>  When you choose View Contact Plans, a list of all Contact Plans in Collect! will be displayed.
+  Buttons on the Contact Plan list allow you to create a New plan, Edit an existing one from the list,
+  or Delete a plan from the list.
+</p>
+<p>  Examine several of the existing plans to get a feel for how they work.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="importexportcontactplan"></a>
+<h3>Import/Export Contact Plan</h3>
+
+<p>  You can also import  <a href="contactplan.html">Contact Plan</a>s from other databases or from technical support documentation that
+  Comtech Systems sends you.
+</p>
+<p>  You can export Contact Plans in a similar fashion. This is often the best way to send Comtech Systems
+  details of a problem you are having with the functioning of your Contact Plan.
+</p>
+<p>  Please refer to the Help topics:  <a href="howtoimportcontactplans.html">How To Import Contact Plans</a> &amp;  <a href="howtoexportcontactplans.html">How To Export Contact Plans</a>.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="contactplanevents"></a>
+<h3>Contact Plan Events</h3>
+
+<p>   <a href="contactplan.html">Contact Plan</a>s are composed of events, as described above. Select an existing plan and click on one
+  of the events listed. The Event form will open and you can examine the settings that are possible
+  for each Event in a Contact Plan. Press F1 from the Event form for an explanation of the settings
+  on the Event form. You can also access information on Contact Plans by pressing F1 from the Contact
+  Plan form.
+</p>
+<p>
+<img src="tip.gif" border="0" alt="Useful Note" />
+ When you are viewing a Contact Plan form, you can press the record navigation buttons:
+         [ << ] BACK , [ >> ] FORWARD to view other plans in Collect!'s  list of Contact Plans. Also,
+         when you are viewing the Events form for a particular plan, you can use the record navigation
+         buttons to scroll through all the Events in the Contact Plan you are viewing.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="designormodifyacontactplan"></a>
+<h3>Design Or Modify A Contact Plan</h3>
+
+<p>  You can print all the details of a particular  <a href="contactplan.html">Contact Plan</a> and all of its Events by pulling down the
+   <a href="printmenu.html">Print menu</a>. Choose Reports and Letters, then choose Quick Print. Choose the destination for your
+  output, for instance, screen or printer. Choose Print. When prompted to include details, choose "Yes".
+</p>
+<p>  This will print a Contact Plan report for the plan you are viewing, including all of the settings
+  for each of its Events. This can be used to examine a plan in detail and figure out the settings you
+  would like for your own plan. If you print this to the printer, you can compare the settings for a
+  few plans and jot down changes. All of the settings are labeled in the report so you will know exactly
+  what you are setting as you draft your own strategy into a Contact Plan.
+</p>
+<p>  You can create a new Contact Plan and apply your settings to it, adding events as needed to complete
+  the plan.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="contactplanform"></a>
+<h3>Contact Plan Form</h3>
+
+<p><a href="javascript:showDiv('28CE4429-CA7A-44E7-836B-9D03A44777B1', 1)">Click Here to View this Form.</a></p>
+<div style="position: absolute; background: #f2f5df; margin-right: 20px; padding: 20px; border: 1px solid #ffa600; display: none;" id="28CE4429-CA7A-44E7-836B-9D03A44777B1" >
+<p style="text-align:center;"><a href="javascript:showDiv('28CE4429-CA7A-44E7-836B-9D03A44777B1', 0)">Click Here to Close this Form.</a></p>
+</p>
+<p>  The Contact Plan form is used to create an automated
+  contact schedule that you can apply to an account in one
+  step. You can prompt for a start date, delete pending
+  contacts, set access rights controlling who can run the
+  plan, and access the Event form to define the contact
+  plan's actions.
+</p>
+<p>  <img style="max-width:1500px;" src="dialogs/contactplan.png" alt="" />
+  <br /><strong>Contact Plan</strong>
+</p>
+<p>  Each Event in the Contact Plan schedules a Contact to
+  perform a particular action on an account. These actions are
+  grouped together into a sequence that makes up the contact
+  plan. The sequence of actions may be as simple as a single
+  contact to write a note to a debtor's Notes. Or, it may be
+  as complex as you need, with many Events occurring in the
+  plan, including other contact plans run from within the plan.
+  Conditions may be set to determine when any particular
+  Event occurs.
+</p>
+<p>  Anything that you can perform in a contact plan, you can
+  also perform manually in Collect! So please, try out your
+  steps manually until you are comfortable with them. It is
+  even helpful to draw out a flowchart of events so that you
+  really know what you want to happen at any given point
+  in your sequence of actions. This gives you ultimate control
+  over the automation process. Please be aware also, that
+  the order of events in a contact plan affects the plan's behavior.
+</p>
+<p>  Contact plans are run by selecting the <strong>Action</strong>
+  button on the Debtor's form, or typing the contact plan
+  code in the field just to the left of the Action button. You
+  can run a contact plan on many accounts at once using
+  Batch Processing.
+</p>
+<p>  You can also run a contact plan when you post a transaction,
+  run an import, post payments, or close an account.
+</p>
+
+<a name="code"></a>
+<h3>Code</h3>
+
+<p>  Each plan must have a unique Code. The Code is typed into
+  the Action field on the Debtor's form to invoke the
+  plan. It may also be chosen from the list of contact
+  plans. Anywhere in Collect! that a contact plan is
+  chosen, this Code will be used by Collect! to run
+  the contact plan.
+</p>
+<p>  Try to use a Code that helps to identify what the
+  contact plan does. For example, contact plan
+  that schedules a call for tomorrow (one day)
+  could have a code C1. A review 14 days from
+  today could be R14.
+</p>
+<p>  The Demonstration database has example
+  contact plans that you can try out. For instance,
+  there is a NEW contact plan used to assign a
+  Letter, and a Review in 10 days. This plan is
+  typically run on newly listed accounts.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="description"></a>
+<h3>Description</h3>
+
+<p>  The Description field is a brief description of
+  the contact plan. This description is displayed
+  in the list of contact plans. You should try to
+  use a description to help you recognize what
+  the plan does.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="lastrundate"></a>
+<h3>Last Run Date</h3>
+
+<p>  When a Contact Plan is run, the date will be written
+  to this field to track the last time it was run.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="lastruntime"></a>
+<h3>Last Run Time</h3>
+
+<p>  When a Contact Plan is run, the time will be written
+  to this field to track the last time it was run.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="includeinclientportal"></a>
+<h3>Include In Client Portal</h3>
+
+<p>  Switch ON 'Include in client portal' to enable
+  Clients to be able to run this contact plan from
+  the web portal.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="promptforstartdate"></a>
+<h3>Prompt For Start Date</h3>
+
+<p>  Switch ON 'Prompt for start date' if you want
+  Collect! to prompt you for a Start Date when you
+  run the contact plan.
+</p>
+<p>  When this switch is OFF, all date references
+  within the contact plan are relative to the
+  current date, when the plan is run. This means
+  that a letter scheduled with a 1 day Delay
+  will be printed in tomorrow's print batch,
+  and a phone call scheduled for 10 days Delay
+  will appear in your WIP List in 10 days.
+</p>
+<p>  When you turn this switch ON, all events in
+  the plan will be scheduled with reference to the
+  date you enter. This means that a letter
+  scheduled with a 1 day Delay will be printed
+  one day after the date you enter, and a phone
+  call scheduled for 10 days Delay will appear in
+  your WIP List 10 days after the date you enter.
+</p>
+<p>  If you want your entered reference date to apply
+  to all the events in a contact plan, you will need
+  to make sure every event has at least a 1 day
+  Delay. If an event has 'Schedule immediately'
+  chosen, it is done immediately, regardless of the
+  reference date you choose.
+</p>
+<p>
+<img src="tip.gif" border="0" alt="Useful Note" />
+ If you run a batch process with this
+         switch ON, Collect! will prompt you
+         only once at the start of the batch.
+         The Start Date you select will be
+         applied to the whole batch.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="deleteallpendingcontacts"></a>
+<h3>Delete All Pending Contacts</h3>
+
+<p>  Switch ON 'Delete all pending contacts' if you want all
+  pending contacts in the debtor's contact schedule to
+  be deleted when the contact plan is run.
+</p>
+<p>
+<img src="warning.gif" border="0" alt="Warning Note" />
+WARNING: Only switch this ON if you are
+             sure you want to Delete all pending
+             contacts. If there is any doubt, leave
+             it OFF, or be sure to switch ON 'Prompt
+             before deleting' described below.
+</p>
+<p>  Switch this OFF to leave any pending contacts in the
+  debtor's contact schedule intact. When you run the
+  plan, new contact events will be scheduled for the
+  debtor, but existing ones will be left in place.
+</p>
+<p>  To toggle the switch, press the Spacebar or
+  click your left mouse button on the field.
+</p>
+<p>  TO CONTROL WHICH EVENT TYPES ARE DELETED
+</p>
+<p>  You may control exactly which event types are deleted,
+  rather than deleting all pending events. Turn this switch
+  Switch this OFF and switch ON 'Delete same type contacts'
+  in the Event form, just for the event types that you want
+  deleted.
+</p>
+<p>  CONTACT PLANS THAT CALL OTHER PLANS
+</p>
+<p>  This switch has no effect when the contact plan is called
+  as a sub-plan of another contact plan. The switch is only
+  operative on the primary contact plan executed. If you
+  have a contact plan that calls other sub-contact plans,
+  the switch will have no effect when set on the sub-contact
+  plans, but will work when set on the primary plan.
+</p>
+<p>  PROMISES
+</p>
+<p>  Scheduled Promise contacts that are 'No Repeat' or have
+  the 'Create Copy on Repeat' switch checked will delete
+  normally. Scheduled Promise contacts that are have a
+  'Repeat' set, but don't have the 'Create Copy on Repeat'
+  will be marked done instead of deleted to maintain the
+  promise integrity.
+</p>
+<p>  CREDIT BUREAU REPORTING
+</p>
+<p>  Scheduled Metro contacts for reporting to credit bureaus
+  are not deleted regardless of this switch setting.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ If the Contact Event has 'No Autodelete' selected,
+          Collect! will not delete the contact.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="promptbeforedeleting"></a>
+<h3>Prompt Before Deleting</h3>
+
+<p>  Switch ON 'Prompt before deleting' if you want Collect!
+  to prompt you before deleting pending contacts. You will
+  be asked if you are sure when the plan is run. A list of
+  pending contacts will be displayed for you.
+</p>
+<p>  With this switch OFF, and 'Delete all pending contacts'
+  switched ON, all pending contacts will automatically
+  be deleted when the plan is run.
+</p>
+<p>  It is a good idea to switch ON 'Prompt before deleting'
+  if you have any doubt about which pending contacts
+  are being deleted.
+</p>
+<p>
+<img src="tip.gif" border="0" alt="Useful Note" />
+ Don't turn this switch ON if you plan to
+         run this contact plan in a batch.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="donotrunoncloseddebtors"></a>
+<h3>Do Not Run On Closed Debtors</h3>
+
+<p>  Switch this ON with a check mark to prevent this plan
+  from running on any debtor with Mode CLOSED. When
+  Closed debtors are encountered in a batch process
+  running this contact plan, they will be skipped and the
+  file numbers will be logged to the Collect! Application Log.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="allowalluserstodelete"></a>
+<h3>Allow All Users To Delete</h3>
+
+<p>  Switch this ON with a check mark if you want to ensure
+  that all pending contacts are deleted no matter who runs
+  this contact plan.
+</p>
+<p>
+<img src="warning.gif" border="0" alt="Warning Note" />
+WARNING: Careful! Switching this ON overrides
+             access rights. This means ANY user level who
+             runs this plan will delete all pending contacts on
+             the account, even if their access rights level does
+             not allow editing or deleting contacts.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="subplan"></a>
+<h3>Sub-Plan</h3>
+
+<p>  Switch this ON with a check mark if this plan is called
+  by another plan and is not to be executed on its own.
+  When this switch is enabled, this plan will not show up
+  in the list of contact plans that the end user sees when
+  the ACTION button is selected. This ensures that your
+  sub-plans will not be selected accidentally and run
+  by themselves.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ There are several setup areas where you
+          can still select a plan that is a sub-plan. For
+          instance, in the Transaction Type form. This
+          gives you, as an administrator, flexibility for
+          calling these plans as needed, while
+          ensuring that your users will not run them
+          accidentally.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="events"></a>
+<h3>Events</h3>
+
+<p>  The Events sub window displays the events in the contact
+  plan and allows you to create new ones. To activate the
+  Event sub window, click into it, or press F5. If this is a new
+  contact plan and there are no events showing in the list, you
+  will be prompted to create one. Select YES. If there are
+  events showing in the list of an existing plan, you may
+  select an Event to view, or press F3 to create a new one.
+</p>
+<p>  Each Event in a contact plan is fully defined in the Event form.
+  You can define letters, phone calls, file reviews, status
+  changes, promises, post Transactions, write Notes to the
+  Debtor record, or make one or more changes to a Debtor
+  record. You can activate or close an account, assign
+  accounts to an Operator, set a Commission rate or plan.
+  You can even cause another contact plan to be executed
+  on some future date.
+</p>
+<p>  Events can be scheduled to occur on certain dates. You can
+  set the number of Days delay before an Event in the contact
+  plan occurs. For example, you could schedule Letter 1 to
+  be sent today, and Letter 2 to be sent in 10 days, based on
+  a condition you set.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ Please turn off the Contact Plan Cache before
+            editing your Contact plans. Change this setting
+            through the System Administration menu, Setup
+            and Configuration, Plans and Reference Tables,
+            WIP Options.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="security"></a>
+<h3>Security</h3>
+
+<p>  Select this button to open the Contact Plan Access Rights
+  form where you can select user levels who will be allowed
+  access to this contact plan.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="delete"></a>
+<h3>Delete</h3>
+
+<p>  This button is visible only on the list of all contact plans.
+  Select this to delete the highlighted item from the database.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="edit"></a>
+<h3>Edit</h3>
+
+<p>  This button is visible only on the list of all contact plans.
+  Select this to open and modify the highlighted item.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="new"></a>
+<h3>New</h3>
+
+<p>  This button is visible only on the list of all contact plans.
+  Select this to open a new blank Contact Plan form.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="help"></a>
+<h3>Help</h3>
+
+<p>  Select this button for help on the Contact Plan
+  form and links to related topics.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="cancel"></a>
+<h3>Cancel</h3>
+
+<p>  Select this button to ignore any changes you may
+  have made and return to the previous form.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="ok"></a>
+<h3>OK</h3>
+
+<p>  Select this button to save any changes you have
+  made and return to the previous form.
+</p>
+<p><strong>&lt;&lt;</strong>
+</p>
+<p>  Select this button to view the previous contact plan
+  in the list.
+</p>
+<p><strong>&gt;&gt;</strong>
+</p>
+<p>  Select this button to view the next contact plan
+  in the list.
+</p>
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+</div></p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="eventform"></a>
+<h3>Event Form</h3>
+
+<p><a href="javascript:showDiv('C333D583-C4D3-41A7-97B7-362931C31F12', 1)">Click Here to View this Form.</a></p>
+<div style="position: absolute; background: #f2f5df; margin-right: 20px; padding: 20px; border: 1px solid #ffa600; display: none;" id="C333D583-C4D3-41A7-97B7-362931C31F12" >
+<p style="text-align:center;"><a href="javascript:showDiv('C333D583-C4D3-41A7-97B7-362931C31F12', 0)">Click Here to Close this Form.</a></p>
+</p>
+<p>  The Event form is used to define actions executed
+  when a contact plan runs. Each Event in a contact plan
+  schedules a contact with the settings you choose in the
+  Event form. The Event form displays fields and pick lists
+  for all the possible settings, allowing you to create any
+  type of contact.
+</p>
+<p>  <img style="max-width:1500px;" src="dialogs/event.png" alt="" />
+  <br /><strong>The Event</strong>
+</p>
+<p>  You can define letters, phone calls, file reviews, status
+  changes, promises, post transactions, write notes to the
+  Debtor record, or make one or more changes to a Debtor
+  record. You can activate or close an account, assign
+  accounts to an operator, set a commission rate or plan.
+  You can even cause another contact plan to be executed
+  on some future date.
+</p>
+<p>  Events can be scheduled to occur on certain dates.
+  You can set the number of days delay before an Event
+  in the contact plan occurs. For example, you could
+  schedule Letter 1 to be sent today, and Letter 2 to be
+  sent in 10 days, based on a condition you set.
+</p>
+<p>  The Event form is accessed through the Contact Plan form.
+  To activate the Event sub window, click into
+  the Event sub window, or press F5. If this is a new contact
+  plan and there are no events showing in the list, you
+  will be prompted to create one. Select YES. If there are
+  events showing in the list of an existing plan, you may
+  select an Event to view, or press F3 to create a new one.
+</p>
+
+<a name="type"></a>
+<h3>Type</h3>
+
+<p>  The Type field sets the type of contact Event that you
+  are scheduling. Press F2 or select the down arrow to
+  view the list of contact types that you can choose.
+</p>
+<p>  The Type of event determines a general action. For
+  instance, Letter means print a letter, while Operator
+  means assign an Operator to the account. Other
+  settings on the Event form define the details, such as
+  which letter to print, or which Operator to assign to the
+  account.
+</p>
+<p>  <a href="contact.html#type" target="_blank">Click here</a> for a description of each type.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="eventtypes"></a>
+<h3>Event Types</h3>
+
+<p>  There are several kinds of events, one for each type of
+  contact in the system.
+</p>
+<p>  Basically, Event Types fall into two groups:
+</p>
+<p>  Operator Assisted Contacts, such as
+  phone calls, requiring Operator intervention. These
+  will appear in the Operator's Work In Progress
+  To Do List.
+</p>
+<p>  Automatic Contacts, such as letters, which are
+  automatically processed by Collect! in batches.
+</p>
+<p>  Please refer to the Help topic Contact for
+  details about entering settings for of the many
+  types of events.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="description"></a>
+<h3>Description</h3>
+
+<p>  The Description field defines the details of the Event.
+  The functionality of the Description field changes
+  depending on the Type of Event that is chosen. For
+  example, if you schedule a Letter Event, the
+  Description field becomes a pick list where you can
+  choose the letter you want printed from the list of
+  all reports in the system. Press F2 from the
+  Description field to display the list. For a Note Event,
+  you type the actual text that you want written to the
+  debtor's Notes into the Description field.
+</p>
+<p>  Please refer to each Event Type for details about
+  what to enter in the Description field for that type
+  of Event.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="attachment"></a>
+<h3>Attachment</h3>
+
+<p>  This field may be used to attach a file to this contact
+  event.
+</p>
+<p>  The filed entered here will be entered into the
+  Attachment field of the Contact that is created when
+  the Contact Plan runs.
+</p>
+<p>  When you attempt to open the attached file, Collect!
+  will look for a folder for the debtor in the ATTACH folder
+  in Collect\bin\global\masterdb\attach\debtor, provided you have
+  named a file that starts with the debtor's File Number.
+  For example, 1025.123, where 1025 is the debtor's File
+  Number and a file named 1025.123 has been placed in
+  the Collect\bin\global\masterdb\attach\debtor\1000\1025 folder.
+</p>
+<p>  If the file is not named with a debtor File Number, or
+  contains the phrase "email", then Collect! expects it to
+  be placed in the STYLES folder, for example,
+  Collect\styles\email5.txt.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="assigntoaccountoperator"></a>
+<h3>Assign To Account Operator</h3>
+
+<p>  Switch ON Assign to Account Operator if you
+  want this Event to be scheduled for the operator
+  who is assigned to the debtor. When the plan
+  is run on an account, the Operator ID from the
+  Debtor form is entered automatically into the
+  contact's Collector field. The contact will show
+  up in the account operator's WIP To Do List.
+</p>
+<p>  To switch this ON, select the radio button
+  next to this field to place a dot in it.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="assigntocurrentoperator"></a>
+<h3>Assign To Current Operator</h3>
+
+<p>  Switch ON Assign to Current Operator if you
+  want this Event to be scheduled for the operator
+  who is currently signed on. When the plan
+  is run on an account, the Operator ID of the
+  operator who is signed on is entered automatically
+  into the contact's Collector field. The contact will
+  show up in the current operator's WIP To Do List.
+</p>
+<p>  To switch this ON, select the radio button
+  next to this field to place a dot in it.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="assigntospecificoperator"></a>
+<h3>Assign To Specific Operator</h3>
+
+<p>  Switch ON Assign to Specific Operator if you
+  want this Event to be scheduled for an operator
+  of your choice. When the plan is run on an
+  account, the Operator ID of the operator you
+  selected is entered automatically into the contact's
+  Collector field. The contact will show up in that
+  specific operator's WIP To Do List.
+</p>
+<p>  To switch this ON, select the radio button
+  next to this field to place a dot in it. The Operator
+  field will appear. Press F2 to select from the list
+  of operators.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="operator"></a>
+<h3>Operator</h3>
+
+<p>  The Operator field is visible only when you
+  switch ON 'Assign to specific operator'.
+  Press F2 from the Operator field to pick from
+  the list of operators.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="priority"></a>
+<h3>Priority</h3>
+
+<p>  The Priority field allows you to enter a priority
+  for this contact Event. Priority may be used to
+  organize your WIP List, or to alert an operator
+  to the importance of a particular contact. In
+  the WIP List you can easily display contacts
+  in order of priority.
+</p>
+<p>  Priority levels in the WIP List are as follows.
+</p>
+<p>  66 to 99  High
+  34 to 65  Medium
+  1 to 33  Low
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="noautocomplete"></a>
+<h3>No Autocomplete</h3>
+
+<p>  In WIP Options, the setting 'Automatically mark
+  contacts done' can be set so that Collect! marks
+  contacts as Done when they are worked from the
+  WIP List. To override this global setting for a
+  particular contact Event, switch ON 'No
+  Autocomplete'.
+</p>
+<p>  To switch this ON, select the check box next to
+  this field to place a check mark in it.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="donotautodelete"></a>
+<h3>Do Not Autodelete</h3>
+
+<p>  Switch ON 'Do not autodelete' to prevent auto-deletion
+  of this contact Event. This is useful for overriding events
+  in other contact plans with 'Delete pending contacts'
+  selected. There may be cases where you do not
+  want pending contacts of this type to be deleted
+  when one of your other contact plans is run.
+</p>
+<p>  To switch this ON, select the check box next to this field
+  to place a check mark in it.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ This also affects behavior when an account is
+          closed manually. Contacts with "Do not
+          autodelete" switched ON are not deleted.
+          However, Promises and Transactions will
+          be marked done when accounts are closed,
+          regardless of this switch setting.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="markdoneimmediately"></a>
+<h3>Mark Done Immediately</h3>
+
+<p>  Switch ON 'Mark done immediately' to mark the contact
+  done immediately after it is created. This is used to
+  record an event in the debtor's history. For instance, you
+  might want to keep track of the fact that a phone
+  conversation was held on a particular day. The contact
+  will never appear in a WIP List.
+</p>
+<p>  To switch this ON, select the check box next to
+  this field to place a check mark in it.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="prompttoconfirmdetails"></a>
+<h3>Prompt To Confirm Details</h3>
+
+<p>  Switch ON 'Prompt to confirm details' to allow the
+  user to check and edit details of the contact before
+  it is saved. This enables the user to change any
+  setting of the scheduled contact. For example, for
+  a Phone contact, the user might modify the Due Date.
+  Or, for a Transaction contact, the Amount may be
+  entered. For a Review, a particular Description might
+  be typed in.
+</p>
+<p>  To switch this ON, select the check box next to
+  this field to place a check mark in it.
+</p>
+<p>  This switch is ignored in batch processing.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="deletesametypecontacts"></a>
+<h3>Delete Same Type Contacts</h3>
+
+<p>  Switch ON 'Delete same type contacts' to delete
+  any pending contacts of this same contact Type
+  when the plan is run. This is useful to prevent
+  mistakenly scheduling two same type contacts
+  for a debtor, or to update a certain contact to
+  the current date.
+</p>
+<p>  For example, if a debtor has a Phone contact
+  scheduled, you could create another Phone
+  contact when a Phone contact plan is run.
+  This might result in a second unintended phone
+  call to the Debtor. To make sure this doesn't
+  happen, switch on 'Delete same type contacts'
+  in your phone Event. When the plan is run, Collect!
+  checks the Debtor's scheduled contacts, and
+  any pending Phone contacts will be deleted
+  when the current one is scheduled.
+</p>
+<p>  To switch this ON, select the check box next to
+  this field to place a check mark in it.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ If a contact has No Autodelete enabled,
+          this option will not delete the contact.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="samedescriptiononly"></a>
+<h3>Same Description Only</h3>
+
+<p>  Switch ON 'Same description only' to limit the
+  pending contacts that are deleted when a plan
+  is run. Now the contact will only be deleted if the
+  Description in the existing contact is exactly
+  the same as the contact you are about to schedule.
+</p>
+<p>  This switch only works when 'Delete same type
+  contacts' is enabled. Same type contacts are
+  not deleted if the Description is not identical.
+</p>
+<p>  To switch this ON, select the check box next to
+  this field to place a check mark in it.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="allowalluserstodelete"></a>
+<h3>Allow All Users To Delete</h3>
+
+<p>  Switch this ON with a check mark if you want to ensure
+  that this contact is deleted no matter who runs the
+  contact plan.
+</p>
+<p>
+<img src="warning.gif" border="0" alt="Warning Note" />
+WARNING: Careful! This switch overrides access
+             rights. That means ANY user level who runs
+             this plan will delete same type contacts on the
+             account, even if their access rights level does
+             not allow editing or deleting contacts.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="advancepromiseonoverpayment"></a>
+<h3>Advance Promise On Overpayment</h3>
+
+<p>  When you create a Promise Event, you can switch
+  ON 'Advance promise on overpayment' to control
+  how Collect! manages promise overpayments. The
+  corresponding switch on the Promise Contact will be
+  set when the contact is scheduled.
+</p>
+<p>  This setting causes Collect! to consider overpayments
+  of promises as prepayments against future promises.
+  For instance, if a Debtor promises to pay $100 per
+  month, and actually makes a payment of $200, the
+  contact's Promise Date will move ahead two payment
+  periods when the transaction for $200 is posted.
+  If  'Advance promise on overpayment' is switched OFF,
+  the Promise Date moves ahead only one period
+  whenever an overpayment is posted.
+</p>
+<p>  To switch this ON, select the check box next to
+  this field to place a check mark in it.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="recordeventhistory"></a>
+<h3>Record Event History</h3>
+
+<p>  Switch this ON if you want Collect! to create a contact on the
+  account when this event is executed. This is useful for recording
+  the event as history on the account for reporting purposes.
+  Certain types of events, such as Letter, Review, Phone, Export,
+  Email and Other have this switch set to ON by default
+</p>
+<p>  For example, you may want to change the account
+  Status using a contact plan. To record this event on
+  the account for tracking purposes, you would switch
+  ON 'Record event history' in the Status event. Or, you
+  may want to print a letter on an account without creating
+  a  letter contact. In that case, you would switch
+  OFF 'Record event history' in the Letter event.
+</p>
+<p>  You can also switch this OFF to prohibit creating a contact,
+  provided you are scheduling the event to occur immediately.
+  If the check box is UNCHECKED, the event will occur but there
+  will be no Contact record on the account.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ When scheduling events that do not occur
+          immediately, Collect! needs a contact to process
+          the event. Also, when scheduling Reviews, Phone
+          contacts and other events for your work queues,
+          Collect! needs a contact. In these cases where a
+          contact is necessary for your event to execute,
+          Collect! will switch ON Record Event History with
+          a Read Only check mark. This will ensure that a
+          contact is created as required.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="scheduleimmediately"></a>
+<h3>Schedule Immediately</h3>
+
+<p>  Switch ON 'Schedule immediately' to schedule the
+  Event as soon as you run the plan. The effect of this
+  depends on the Type of event. For example, if you
+  are scheduling a Review, the contact is created
+  right away for today's date. For a Transaction, the
+  Transaction is posted immediately. For a Plan within
+  the plan, the second plan is run immediately. For
+  Note, the debtor's Notes are written to immediately.
+</p>
+<p>  To switch this ON, select the radio button
+  next to this field to place a dot in it.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="printnow"></a>
+<h3>Print Now</h3>
+
+<p>  Switch ON 'Print now' to print a letter immediately
+  as soon as you run the contact plan. This overrides
+  any delays set in the plan.
+</p>
+<p>  This switch is visible only when you are scheduling
+  a Letter Event and have enabled 'Schedule immediately'.
+</p>
+<p>  To switch this ON, select the check box next to
+  this field to place a check mark in it.
+</p>
+<p>  When you select "Print now," the "Create metafile"
+  check box becomes visible.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="createmetafile"></a>
+<h3>Create Metafile</h3>
+
+<p>  Switch this ON to create and attach a METAFILE to
+  the Letter Contact when this Letter Event is executed.
+</p>
+<p>  This field is visible only if you have selected "Print now."
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ To create and attach a METAFILE, you
+          must also ensure that "Record event
+          history" is switched ON.
+</p>
+<p>  When a letter is printed via a "Print now" contact event
+  with the "Create metafile" switch enabled, the METAFILE
+  will be created and attached to the Letter contact, just as
+  it would if the report had been printed manually. This also
+  applies to letters printed to Email.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ Collect! will not create a METAFILE if the
+          Client Settings switch "Disable metafiles" is
+          switched ON unless you are printing your
+          Scheduled Batch Letters.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="nonotetofile"></a>
+<h3>No Note To File</h3>
+
+<p>  Switch this ON with a check mark if you do not want
+  Collect! to print a line to the Notes when this Letter
+  event is executed. This will override the "Write note
+  to file when printing" setting in Screen and Messages.
+</p>
+<p>  This field is visible only if you have selected "Print now."
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="delaydays"></a>
+<h3>Delay Days</h3>
+
+<p>  Switch ON 'Delay days' to schedule the Event to
+  occur a given number of days after the contact
+  plan is run. For example, if you enter a 7 day
+  delay, when the Contact Plan is run, this Event
+  will be scheduled for 7 days later.
+</p>
+<p>  To switch this ON, select the radio button
+  next to this field to place a dot in it. This will
+  make the 'Days' field visible. There you can
+  enter the number of days to delay the
+  Event.
+</p>
+<p>  You can further control this by switching ON 'Prompt
+  for start date' on the Contact Plan form. Then
+  the user will be prompted when the plan is run.
+  The date the user enters will be used as a reference
+  date. In the example above, the contact would
+  occur 7 days from the date entered by the user
+  when the plan is run.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="days"></a>
+<h3>Days</h3>
+
+<p>  Enter the number of days to delay the Event, for
+  example, 30. This field is visible only when 'Delay days'
+  is enabled.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="dayofmonth"></a>
+<h3>Day Of Month</h3>
+
+<p>  Switch ON 'Day of month' to schedule the Event
+  for a particular day of the month. For example,
+  if you enter 15 as the day of the month, when the
+  batch process is run on the 15th of the month,
+  the contact Event will occur.
+</p>
+<p>  If the current date is after the 15th already, then
+  the Event is scheduled for the 15th of next month.
+  Since this is an absolute day of the month, it will
+  not be affected by setting the 'Prompt for start
+  date' for the contact plan.
+</p>
+<p>  To switch this ON, select the radio button next to
+  this field to place a dot in it. This will make
+  the 'DOM' field visible. There you can enter the day
+  of the month you want the Event to occur.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="dom"></a>
+<h3>Dom</h3>
+
+<p>  Enter the day of the month you want the Event
+  to occur. This field is visible only when 'Day of month'
+  is enabled.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="delaymonths"></a>
+<h3>Delay Months</h3>
+
+<p>  Switch ON 'Delay months' to schedule the Event to
+  occur a given number of months after the contact
+  plan is run. For example, if you enter a 3 month
+  delay, when the Contact Plan is run, this Event
+  will be scheduled for 3 months later.
+</p>
+<p>  To switch this ON, select the radio button
+  next to this field to place a dot in it. This will
+  make the 'Months' field visible. There you can
+  enter the number of months to delay the
+  Event.
+</p>
+<p>  You can further control this by switching ON 'Prompt
+  for start date' on the Contact Plan form. Then
+  the user will be prompted when the plan is run.
+  The date the user enters will be used as a reference
+  date. In the example above, the contact would
+  occur 3 months from the date entered by the user
+  when the plan is run.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="months"></a>
+<h3>Months</h3>
+
+<p>  Enter the number of days to delay the Event, for
+  example, 3. This field is visible only when 'Delay months'
+  is enabled.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="nextmonthsameday"></a>
+<h3>Next Month Same Day</h3>
+
+<p>  Switch ON 'Next month same day' to schedule the
+  Event for next month on the same day of the month
+  that the plan is run. For example, if you run the
+  plan on the 15th of November, when you run your
+  batch process on the 15th of December, the contact
+  Event will occur.
+</p>
+<p>  This is actually a very powerful control. Imagine a
+  contact plan with a Plan Event that calls the same
+  contact plan on the same day next month. This results
+  in a repeating contact plan. With conditional contact
+  scheduling as described below you can create a high
+  level of automation this way.
+</p>
+<p>  To switch this ON, select the radio button next to
+  this field to place a dot in it.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ If a contact is scheduled to occur on
+          the 31st day of the month, and a month
+          does not have 31 days, the event will
+          occur on the last day of that month.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="timeless"></a>
+<h3>Timeless</h3>
+
+<p>  This switch is ON by default. No specific time is
+  set for this Event.
+</p>
+<p>  To switch this ON, select the radio button
+  next to this field to place a dot in it.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="delay"></a>
+<h3>Delay</h3>
+
+<p>  Switch ON 'Delay' to schedule the Event to
+  occur after a given amount of time has passed.
+  For example, if you entered 1:00 in the time,
+  and you invoke this Contact Plan at 3:26:43 PM
+  or 15:26:43 hours, the resulting contact will be
+  scheduled for 4:26:43 PM or 16:26:43 hours.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ Collect! uses a 24 hour clock.
+</p>
+<p>  To switch this ON, select the radio button
+  next to this field to place a dot in it. This will
+  make the 'Minutes' field visible. There you can
+  enter the number of minutes or hours to delay
+  the Event.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="minutes"></a>
+<h3>Minutes</h3>
+
+<p>  Enter the number of minutes to delay the
+  Event. For example, 40 means 40 minutes,
+  while 1:00 means 60 minutes or 1 hour.
+  This field is visible only when 'Delay' is enabled.
+  The contact will be scheduled for the current
+  time when the plan is invoked, plus the number
+  of minutes specified here for delay.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="timeofday"></a>
+<h3>Time Of Day</h3>
+
+<p>  Switch ON 'Time of day' to schedule the Event
+  to occur at a particular time. For example, if you
+  enter 18:35 for the time, this contact Event
+  will be scheduled for 6:35 PM.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ Collect! uses a 24 hour clock.
+</p>
+<p>  To switch this ON, select the radio button
+  next to this field to place a dot in it. This will
+  make the 'ToD' field visible where you can enter
+  the time of day for this Event.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="tod"></a>
+<h3>Tod</h3>
+
+<p>  Enter the time of day when you want this Event
+  to occur. The number of hours and minutes must
+  be entered in HH:MM format.
+</p>
+<p>  Time of day is in 24 hour format. In other words, if
+  you type 4 it's 4 AM. Type 16 for 4 PM, 18 for 6 PM
+  and so on. You can set the time to the minute. For
+  example, you could type 16:25 and the call will pop
+  up at 4:25 PM.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ Collect! uses a 24 hour clock.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="scheduleif"></a>
+<h3>Schedule If</h3>
+
+<p>  The 'Schedule if' field is used for specifying a condition
+  to base this Event on. Type in Collect!'s field code for
+  the field you want to use for your conditional test or
+  press F2 from the 'Schedule if' field to select from the
+  list of available fields.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ Fields on the Debtor form work well for
+          setting conditions.
+</p>
+<p>
+<img src="tip.gif" border="0" alt="Useful Note" />
+ Refer to How to Use Schedule If Based on User Level of Debtor Collector
+         for information on configuring a contact plan
+         to only run on the user level of a collector,
+         instead of the user level of the operator who
+         runs the plan.
+</p>
+<p>  Please refer to Conditional Event Scheduling below
+  for important considerations when using this feature.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="if"></a>
+<h3>If</h3>
+
+<p>  The 'If' field holds the condition that you are using
+  for your test. Press F2 when you are in the 'If'
+  field to choose from the list.
+</p>
+<p>  Your choices are:
+</p>
+<p>  =   Equal to<br />
+  &gt;   Greater than<br />
+  &lt;   Less than<br />
+  &lt;&gt; Not equal to<br />
+  ..   Within a range<br />
+  &gt;= Greater than or equal to<br />
+  &lt;= Less than or equal to
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="value1"></a>
+<h3>Value 1</h3>
+
+<p>  Enter the value that the 'Schedule if' field is compared
+  to. When the 'If' field has "Within a range" selected,
+  the 'Value 1' field is the minimum value of the range.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ This must be the same data type as the
+          field you are comparing to. Please refer
+          to Conditional Event Scheduling below for
+          further information.
+</p>
+<p> This field has a character size of 23.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="value2"></a>
+<h3>Value 2</h3>
+
+<p>  Enter the maximum value that the 'Schedule if' field is
+  compared to. This field is visible only when the 'If' field
+  has "Within a range" selected.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ This must be the same data type as the
+          field you are comparing to. Please refer
+          to Conditional Event Scheduling below for
+          further information.
+</p>
+<p>  This field has a character size of 23.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="repeat"></a>
+<h3>Repeat</h3>
+
+<p>  The Repeat field allows you to automatically repeat
+  a contact Event. The repeat period is written to the
+  contact. Collect! reads it when the contact Event
+  occurs and forwards the contact to the next period.
+  This can be used, for example, to repeat printing a
+  letter or posting a promised payment. You can also
+  use conditional scheduling to determine whether or
+  not to process the Event. Repeat occurs when you
+  print a letter, post a promised payment or batch
+  process previously scheduled contacts.
+</p>
+<p>  Click the Repeat field to select a repeat period.
+  When you select a value, additional fields
+  become visible. When you select "Custom," the
+  Number of Days field becomes visible.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="maxintervals"></a>
+<h3>Max Intervals</h3>
+
+<p>  This field is visible when you select a REPEAT
+  period. It will be written to the Contact and Collect!
+  will use it to determine the number of times this
+  Event is repeated.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="numberofdays"></a>
+<h3>Number Of Days</h3>
+
+<p>  Enter the number of days to forward this contact.
+  When the contact Event occurs, this number of days
+  will be added to the Due Date of the repeating
+  contact. This field is visible only when 'Repeat' is
+  set to "Custom."
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="createcopyonrepeat"></a>
+<h3>Create Copy On Repeat</h3>
+
+<p>  This field is visible only when there is a value in
+  the Repeat field.
+</p>
+<p>  Switch this ON with a check mark to create a completed
+  copy of the Contact every time it is forwarded. This
+  allows you to track a past history of the Contact.
+  If the Contact is a Letter, Collect! will attach a Metafile
+  to the completed Contact if you have Metafiles enabled.
+</p>
+<p>  This switch is referenced when Promises are forwarded,
+  when previously scheduled transactions are batched,
+  when letters are batch printed, or when contacts are
+  worked through the WIP List.
+</p>
+<p>  This switch will also be referenced whenever you
+  process automatic contacts previously scheduled.
+  All automated types of contacts are handled. This
+  includes Activate, Commission, Rate Plan, Transaction,
+  Plan, Status, Operator, Sales, Edit, Note and Close.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="logrepeattonotes"></a>
+<h3>Log Repeat To Notes</h3>
+
+<p>  This field is visible only when there is a value in
+  the Repeat field.
+</p>
+<p>  Switch this ON with a check mark to write a line to the
+  debtor's Notes every time the Contact is forwarded.
+</p>
+<p>  The note is in the following format:
+</p>
+<p>  [Type] type contact [Description], due [Date] processed
+  by [Op ID]
+</p>
+<p>  This switch is referenced when Promises are forwarded,
+  when previously scheduled transactions are batched,
+  when letters are batch printed, or when contacts are
+  worked through the WIP List.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="promise"></a>
+<h3>Promise</h3>
+
+<p>  This field is visible only when the Event Type is Promise.
+  Enter a percentage amount for the Promise. Then
+  specify whether this is percent of Owing or percent of
+  Settlement.
+</p>
+<p>  <img style="max-width:1500px;" src="dialogs/eventpromise.png" alt="Promise event" />
+  <strong>Promise Event</strong>
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="ofowing"></a>
+<h3>Of Owing</h3>
+
+<p>  This field is visible only when the Event Type is Promise.
+  Select this to calculate the Promise percentage based
+  on the amount in the Debtor's Owing field.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="ofsettle"></a>
+<h3>Of Settle</h3>
+
+<p>  This field is visible only when the Event Type is Promise.
+  Select this to calculate the Promise percentage based
+  on the amount in the Debtor's Settle field.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="delete"></a>
+<h3>Delete</h3>
+
+<p>  This button is visible only on the list of all Events. Select
+  this to delete the highlighted item from the list.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="edit"></a>
+<h3>Edit</h3>
+
+<p>  This button is visible only on the list of all Events. Select this
+  to open and modify the highlighted Event.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="new"></a>
+<h3>New</h3>
+
+<p>  Select this button to save your changes and
+  open a new blank Event form.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="cancel"></a>
+<h3>Cancel</h3>
+
+<p>  Select this button to discard any changes you made
+  and return to the previous form.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="ok"></a>
+<h3>OK</h3>
+
+<p>  Select this button to save any changes
+  you have made and return to the previous form.
+</p>
+<p><strong>&lt;&lt;</strong>
+</p>
+<p>  Select this button to go to the previous Event
+  in the contact plan's Event list.
+</p>
+<p><strong>&gt;&gt;</strong>
+</p>
+<p>  Select this button to go to the next Event in the
+  contact plan's event list.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="help"></a>
+<h3>Help</h3>
+
+<p>  Select this button for help on the Event form and
+  links to related topics.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="conditionaleventscheduling"></a>
+<h3>Conditional Event Scheduling</h3>
+
+<p>  Conditional Event scheduling lets you put your own intelligence
+  into your contact plans. Events can be executed based on a
+  condition that you specify using the 'Schedule if' field on the
+  Event form. This feature gives you great flexibility and the
+  power to have Collect! make decisions for you automatically.
+</p>
+<p>  When you enter a SCHEDULE IF expression in the Event form,
+  the Event is evaluated based on this expression when the plan
+  is run. If the condition is not true, the Event is skipped.
+</p>
+<p>  <h4>To compare two fields of the same data type</h4>
+</p>
+<p>  SYNTAX: Schedule if: de.li &lt; @de.ch
+</p>
+<p>  In this example, de.li is chosen from the pick list for
+  the 'Schedule If' field. Less than [&lt;] is chosen from the
+  pick list for the 'If' field and @de.ch is entered manually
+  in the Value 1 field. Conditional comparisons only work
+  if both fields are the SAME DATA TYPE, for instance,
+  both dates, or both currency.
+</p>
+<p>  When using conditional scheduling, it is very important
+  to test your contact plan thoroughly so that you are sure
+  it is performing as you expect.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ Fields on the Debtor record work well for setting
+          conditions. To conditionally create a contact based Client
+          number, don't use the code @cl.cl. Use @de.cl  to reference
+          the Client associated with the contact's Debtor. The
+          code @cl.cl picks whatever the last Client's ID was, rather
+          than the Client belonging to the contact being processed.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="scheduleifuserlevel"></a>
+<h3>Schedule If User Level</h3>
+
+<p>  You can also schedule events to trigger on the User Level
+  of the Operator who owns the Debtor you are running the
+  plan on. Select <strong>os.ul</strong> from the Schedule
+  If pick list and for your criteria, use the number of the User
+  Level or range of numbers of User Levels.
+</p>
+<p>
+<img src="tip.gif" border="0" alt="Useful Note" />
+ Examples of conditional events can be found in the
+         contact plans in the Demonstration database shipped with
+         Collect!.
+</p>
+<p>  Also, please refer to the Help topic
+  How to Use Contact Plans which
+  lays out the exact order in which events are executed
+  when a Contact Plan is run on an account. It makes a
+  difference if you are running complex plans!
+</p>
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+</div></p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="selectacontactplanforadebtor"></a>
+<h3>Select A Contact Plan For A Debtor</h3>
+
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ For these exercises,  please sign into Collect! as operator OWN. When you choose a  <a href="debtor.html">Debtor</a>
+          for one of the instructions, check the upper right hand corner of the Debtor form. The Operator
+          field should read OWN. This way, your results should match the results that are described
+          in the examples.
+</p>
+<p>  Pull down the  <a href="browsemenu.html">Browse menu</a> and choose Active Debtors. Then, open a Debtor form by pressing F5. Click
+  the Action button or press F2 when you are in the Run Plan field. The list of  <a href="contactplan.html">Contact plan</a>s pops up.
+  Choose one that sends a letter or schedules a phone call and press the Enter key. Collect! runs the
+  Contact Plan behind the scenes, scheduling Contacts and performing other  <a href="contact.html">tasks</a> set in the Contact
+  Plan and its Events.
+</p>
+<p>  Select the Contacts tab. The list of this Debtor's contacts is displayed. Notice that the new
+  contacts have been added to this list.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="workinprogress"></a>
+<h3>Work In Progress</h3>
+
+<p>  Go to the  <a href="mainmenu.html">Main Menu</a> and choose  <a href="workinprogress.html">Work In Progress</a>. The Contacts scheduled in the Contact Plan to occur
+  immediately will now appear in your  <a href="todolist.html">To Do list</a> or in the list of the appropriate operator. Events
+  scheduled in the future, such as reviews, will appear in Work In Progress on future dates as setup
+  in the  <a href="contactplan.html">Contact Plan</a> and displayed in the Debtor's contacts after the Contact Plan is run.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="batchprocessing"></a>
+<h3>Batch Processing</h3>
+
+<p>  You can also run  <a href="contactplan.html">Contact plan</a>s on batches of accounts. You can batch accounts by any criteria you
+  choose. Use the  <a href="toolsmenu.html">Tools Menu</a>  <a href="batchprocessing.html">Batch Processing</a> command for more information.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="contactplancaching"></a>
+<h3>Contact Plan Caching</h3>
+
+<p>  Collect! has the ability to store  <a href="contactplan.html">Contact Plan</a>s in RAM for faster processing. If this feature is
+  enabled, then the first time a Contact Plan is run, all the Plans will be cached in RAM.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ Cached Contact Plans are not updated if they are modified. When Plans are modified, users
+          will have to sign out and back in.
+</p>
+<p>  To enable Contact Plan caching:
+</p>
+<p>  <ol>
+    <li>Navigate to the  <a href="systemmenu.html">System menu</a>, select  <a href="contactmanagementsettings.html">Contact Management Settings</a>, then click Work In Progress
+        Settings.</li>
+    <li>Check mark <strong>Cache contact plans</strong> to switch it ON.</li>
+    <li>Click Save Operator or Save System, depending on who this should apply to.</li>
+  </ol>
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="howcollectexecutescontactplansinternally"></a>
+<h3>How Collect! Executes Contact Plans Internally</h3>
+
+<p>  When you choose an action for a Client or Debtor, Collect! goes through the following process.
+</p>
+<p>  <h4>Read the  <a href="contactplan.html">Contact Plan</a></h4>
+</p>
+<p>  Collect! reads the Contact plan from the local Contact plan cache or from disk.
+</p>
+<p>  <h4>If the Prompt Before Deleting Switch is Set</h4>
+</p>
+<p>  <ol>
+    <li>Make a list of pending Contacts.</li>
+    <li>Display the list.</li>
+    <li>Ask the User if they should be deleted.</li>
+    <li>If the User cancels, then cancel the whole plan.</li>
+  </ol>
+</p>
+<p>  Otherwise, continue.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ Don't turn the "Prompt Before Deleting" switch on if you plan to run a Contact plan in a
+          batch.
+</p>
+<p>  <h4>If the Delete All Pending Contacts Switch is Set on the Plan OR If the Delete Same Type Contact
+  Switch is Set on the Event</h4>
+</p>
+<p>  Collect! scans through all pending Contacts for the Debtor.
+</p>
+<p>  Delete All Pending Contacts will process all Contacts.
+</p>
+<p>  If Delete All is not checked, but one of the events has the "Delete Same Type Contact" switch set,
+  then only Contacts of that type are deleted. If "Same Description Only" is checked, then only Contacts
+  of that type and description will be deleted.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ Metro Credit Report Contacts are not deleted.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ Some contacts, like repeating Promises or active contacts from the WIP, are simply marked
+          as completed.
+</p>
+<p>  <h4>If the Prompt For Start Date Switch is Set</h4>
+</p>
+<p>  If the "Prompt For Start Date" switch is set in the Contact plan, then Collect! prompts for the
+  reference date for the Contact plan; otherwise, today's date it used.
+</p>
+<p>
+<img src="tip.gif" border="0" alt="Useful Note" />
+ If you run a batch process with this switch ON, Collect! will prompt you only once at the
+         start of the batch. The Start Date you select will be applied to the whole batch.
+</p>
+<p>  <h4>Scanning Through Each Event</h4>
+</p>
+<p>  Collect! scans though each event in the Contact plan and prepares the Contact details.
+</p>
+<p>  <strong>Determing the Contact Date</strong>
+</p>
+<p>  Now Collect! performs the following tasks:
+</p>
+<p>  <ol>
+    <li>If the "Delay  <a href="day.html">Day</a>s" switch in the Event form is set, take the reference date and add the
+        number of delay days.</li>
+    <li>If the "Day of Month" switch is set in the Event form, then check today's date.</li>
+</p>
+<p>  If today's Day of Month is less than the specified Day, then schedule the Contact for this month
+  on that day. If we are already past that day of the month, schedule it for next month on that day.
+</p>
+<p>  If you did not enter a value for Day, Collect! will default to the 1st of the month.
+</p>
+<p>    <li>If the "Next Month Same Day" is set in the Event form, then schedule the Contact for next
+        month, the current day of month. For example, if today is the 20th of October, the Contact
+        will be scheduled for the 20th of November.</li>
+    <li>After the date has been set, check the  <a href="wipoptions.html">WIP Options</a> to determine whether the "Schedule Contacts
+        On Weekends" switch is turned on. If Contacts are not to be scheduled for weekends, increment
+        the date if it falls on a  <a href="holiday.html">holiday</a>.</li>
+  </ol>
+</p>
+<p>  <strong>Determine the Contact Time</strong>
+</p>
+<p>  <ol>
+    <li>If no time is specified in the Contact form, make the scheduled Contact time 0.</li>
+    <li>If the "Delay Minutes" switch is set in the Event form, add the delay time to the current time
+        of day. This is useful for setting a phone call for a few minutes from now.</li>
+    <li>If the "Timeless" switch is set in the Event form, then set the scheduled time to that time of
+        day. For example, if the Time entered is 18:00, the Contact will be scheduled for 6 PM.</li>
+  </ol>
+</p>
+<p>  <strong>Fill in the Other Contact Details</strong>
+</p>
+<p>  Collect! fills in other Contact details, such as the priority, Operator, description and so on.
+</p>
+<p>  <h4>If the Prompt To Confirm Details is Set</h4>
+</p>
+<p>  If "Prompt To Confirm Details" is set in the Event form, then display the Contact as scheduled, and
+  allow the User to change the details.
+</p>
+<p>  <h4>Processing the Contacts:</h4>
+</p>
+<p>  Collect! will group the contacts into the follow groups and run them in the order that they appear
+  in the  <a href="event.html">Contact Plan Event</a> list.
+</p>
+<p>  <strong>1. Plans, Letters, and Certain Transactions</strong>
+</p>
+<p>  Any Contact plan events scheduled in the plan for zero delay are run immediately, in the order listed
+  in the first Contact plan. Events within the called plan are also processed in the same order, as
+  outlined here. Notice that any changes made in the sub-plan will take effect before other events are
+  processed in the main plan.
+</p>
+<p>  Letters that are marked as "Print Now" will print.
+</p>
+<p>  Transactions that have "Prompt To Confirm Details" will prompt the user to confirm the transactions
+  details, then it will post to the database immediately.
+</p>
+<p>  <strong>2. Activate</strong>
+</p>
+<p>  Collect! executes Activate events to update the Debtor's mode. This is done near the beginning to
+  make sure that the account is active for recalc purposes.
+</p>
+<p>  <strong>3. Notes</strong>
+</p>
+<p>  Notes scheduled for today are written to the  <a href="debtornotes.html">Debtor notes</a>. They will contain the previous account
+  status before the plan was run (unless it was changed in called plan), but the new Operator if one
+  was assigned, and any changes made by the Contact plan.
+</p>
+<p>  <strong>4. Status, Sales, Edits, Commission, and Rate Plans</strong>
+</p>
+<p>  Status changes, sales assignments, edits, commissions, and rate plans that are scheduled for today
+  will execute next.
+</p>
+<p>  <strong>5. Promises</strong>
+</p>
+<p>  Promises are created next.
+</p>
+<p>  <strong>6. Operator Assignments</strong>
+</p>
+<p>  Operator assignments that are scheduled for today are made.
+</p>
+<p>  <strong>7. Transactions</strong>
+</p>
+<p>  Transactions that don't have "Prompt To Confirm Details" checked and are scheduled for today are
+  posted.
+</p>
+<p>  <strong>8. Metro</strong>
+</p>
+<p>  This is an honorable mention as Metro contacts should never be created in a contact plan. Please
+  refer to the Help topic  <a href="howtoreadthemetrocontactdescription.html">How To Read The Metro Contact Description</a> for more information.
+</p>
+<p>  <strong>9. Other, Phone, Review,  <a href="email.html">Email</a>, Client, ODBC, and Delayed Contacts</strong>
+</p>
+<p>  All remaining Contacts are scheduled, except Close. Those include the above Contact types if they
+  are scheduled for a future date.
+</p>
+<p>
+<img src="tip.gif" border="0" alt="Useful Note" />
+ The Contact events that are scheduled for a future date can be run using the  <a href="toolsmenu.html">Tools menu</a>
+          <a href="batchprocessing.html">Batch Processing</a> command.
+</p>
+<p>  <strong>10. Close</strong>
+</p>
+<p>  Collect! executes Close events to update the Debtor's mode. This is done last to ensure that
+  any financial recalculations are done first.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="contactplansamples"></a>
+<h3>Contact Plan Samples</h3>
+
+<p>  Quite a number of sample  <a href="contactplan.html">contact plan</a>s can be found in the Demodb database that ships with Collect!.
+  As described above, it's easy to change existing plans and add new ones to suit your requirements.
+  The list below introduces some basic predefined Contact Plans.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ The pre-designed Contact Plans are only found in the Demodb database.
+</p>
+<p>  <h4>Copying Contact Plans</h4>
+</p>
+<p>  If you would like to copy some of these Contact Plans into your Masterdb database:
+</p>
+<p>  <ol>
+    <li>At the  <a href="mainmenu.html">Main Menu</a>, pull down the System menu and choose  <a href="contactmanagementsettings.html">Contact Management Settings</a>.</li>
+    <li>Then select View Contact Plans.</li>
+    <li>From the list that is displayed, use the arrow keys to locate and highlight the Contact Plan
+        you would like to copy.</li>
+    <li>Select Edit from the top menu bar and then select Copy from the drop-down choices. You will
+        be notified that your Contact Plan has been copied to the Clipboard.</li>
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ To copy additional Contact Plans, use the arrow keys to highlight them. Repeat step 4. You
+          will be notified that other items are on the Clipboard. Choose "No" to add this item to the
+          Clipboard  <a href="contents.html">contents</a>.
+</p>
+<p>    <li>Click OK to close the Contact Plans list. Choose Quit at the Main Menu to exit from your
+        Demodb database.</li>
+    <li>At the  <a href="welcometocollect.html">Welcome to Collect!</a> screen, switch to your Masterdb database. The Database to Open
+        field will now display "MASTERDB."</li>
+    <li>Repeat steps 1 and 2.</li>
+    <li>With the list of Contact Plans displayed, pull down the  <a href="editmenu.html">Edit menu</a> and choose Paste.</li>
+    <li>Check the Contact Plan(s) you copied to make sure it has all the information of the original
+        and all the Events listed.</li>
+  </ol>
+</p>
+<p>  <h4>Contact Plan and Event Settings</h4>
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ Only settings that are switched ON are listed below. You can view these Contact Plans as
+          described above under the heading "View Contact Plans.".
+</p>
+<p>
+<img src="tip.gif" border="0" alt="Useful Note" />
+ You will find it most helpful if you open each Contact Plan as it is being discussed and
+         examine the settings that are mentioned. Pull down the  <a href="systemmenu.html">System Menu</a>, choose Contact Management
+         Settings, Contact Plans and then choose View. Look for each plan by its Code.
+</p>
+<p>  Press F1 on the Contact Plan form and the Event form for field level help and details.
+</p>
+<p>  <center> *** PLANS IN THE DEMONSTRATION DATABASE MAY NOT HAVE EXACTLY THE SAME SETTINGS AS THESE
+  PLANS ***</center>
+</p>
+<p>  <h4> <a href="newbusiness.html">New Business</a></h4>
+</p>
+<p>  This Contact Plan manages new  <a href="debtor.html">accounts</a>. It is made up of a Contact Plan with five events. After an
+  initial letter, a phone call is made. This is followed by two more letters at intervals set in
+  "Delay Days" in the Event form. The events are scheduled and will appear in the  <a href="workinprogress.html">Work In Progress</a>
+  list of the account operator on the days predetermined by the Contact Plan.
+</p>
+<p>  On the days that letters are to be sent, they will be included automatically in batch process
+  letters for that day.
+</p>
+<p>  On the Contact Plan form, the following information is setup:
+</p>
+  <blockquote>
+<p>  Code: NEW<br />
+  Description: New Business<br />
+  Delete all pending contacts
+</p>
+  </blockquote>
+<p>  The five Events for NEW are as follows:
+</p>
+<p>  <ol>
+    <li>This Event sets the  <a href="debtorstatus.html">Debtor status</a> to NEW.</li>
+</p>
+  <blockquote>
+<p>  Type: Status<br />
+  Description:  NEW<br />
+  Assign to account operator<br />
+  Schedule immediately<br />
+  Timeless
+</p>
+  </blockquote>
+    <li>This Event sends the first Letter.</li>
+</p>
+  <blockquote>
+<p>  Type: Letter<br />
+  Description: Letter 1<br />
+  Assign to account operator<br />
+  Schedule immediately<br />
+  Priority: 10<br />
+  Timeless
+</p>
+  </blockquote>
+    <li>This Event schedules a phone call after 10 days.</li>
+</p>
+  <blockquote>
+<p>  Type: Phone<br />
+  Description: Home<br />
+  Assign to account operator<br />
+  Delay days: Yes ......... Days: 10<br />
+  Priority: 30<br />
+  Timeless
+</p>
+  </blockquote>
+    <li>This Event sends a second letter when 30 days have lapsed.</li>
+</p>
+  <blockquote>
+<p>  Type: Letter<br />
+  Description: Letter 2<br />
+  Assign to account operator<br />
+  Delay days: Yes ........ Days: 30<br />
+  Priority: 20<br />
+  Timeless
+</p>
+  </blockquote>
+    <li>This Event sends a third letter when 60 days have lapsed.</li>
+</p>
+  <blockquote>
+<p>  Type: Letter<br />
+  Description: Letter 3<br />
+  Assign to account operator<br />
+  Delay days: Yes ........ Days: 60<br />
+  Priority: 30<br />
+  Timeless
+</p>
+  </blockquote>  </ol>
+
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ The Days in "Delay days" are counted from the day the Contact Plan is run. So this Contact
+          Plan has two events that happen immediately, a status change and a letter. Counting from
+          this date, another Event is 3 days later, one 30 days later and one 60 days later - all
+          counted from  the same beginning date - the first day the Contact Plan is run.
+</p>
+<p>  <h4>Close File</h4>
+</p>
+<p>  This Contact Plan will close an account and note that it has been closed. It can be used with
+  another plan that sets the conditions for closing files. For instance, if an account is paid in full,
+  the account could be closed automatically.
+</p>
+<p>
+<img src="tip.gif" border="0" alt="Useful Note" />
+ See the topic How To Design New Contact Plans where a Paid In Full Contact Plan is designed
+         using this idea.
+</p>
+<p>  On the Contact Plan form, the following information is setup:
+</p>
+  <blockquote>
+<p>  Code: CLO<br />
+  Description: Close File<br />
+  Delete all pending contacts
+</p>
+  </blockquote>
+<p>  The two Events for CLO are as follows:
+</p>
+<p>  <ol>
+    <li>This Event closes the file.</li>
+</p>
+  <blockquote>
+<p>  Type: Close<br />
+  Assign to account operator<br />
+  Schedule immediately<br />
+  Timeless
+</p>
+  </blockquote>
+    <li>This Event writes a note the Debtor's record.</li>
+</p>
+  <blockquote>
+<p>  Type: Note<br />
+  Description: File closed<br />
+  Assign to account operator<br />
+  Schedule immediately<br />
+  Timeless
+</p>
+  </blockquote>  </ol>
+
+<p>  <h4>Call in Fifteen Minutes</h4>
+</p>
+<p>  This Contact Plan schedules two events - one, a phone call in fifteen minutes and the other, a note,
+  in case of a busy signal.
+</p>
+<p>  On the Contact Plan form, the following information is setup:
+</p>
+  <blockquote>
+<p>  Code: C0<br />
+  Description: Call In 15 Minutes
+</p>
+  </blockquote>
+<p>  The two Events in C0 are as follows:
+</p>
+<p>  <ol>
+    <li>This Event schedules a phone call in 15 minutes.</li>
+</p>
+  <blockquote>
+<p>  Type: Phone<br />
+  Description: Home<br />
+  Assign to account operator<br />
+  Schedule immediately<br />
+  Priority: 90<br />
+  Delay: Yes ...... Minutes: 15<br />
+  Timeless
+</p>
+  </blockquote>
+    <li>This Event writes a Note to the Debtor record.</li>
+</p>
+  <blockquote>
+<p>  Type: Note<br />
+  Description: Busy, call again in 15 minutes<br />
+  Assign to account operator<br />
+  Schedule immediately<br />
+  Timeless
+</p>
+  </blockquote>  </ol>
+
+<p>  <h4>Send a Letter</h4>
+</p>
+<p>  This Contact Plan schedules a letter to be sent. Then it schedules a review to check whether a
+  response was received.
+</p>
+<p>  On the Contact Plan form, the following information is setup:
+</p>
+  <blockquote>
+<p>  Code: L1<br />
+  Description: Letter 1 - Today
+</p>
+  </blockquote>
+<p>  The two Events in L1 are as follows:
+</p>
+<p>  <ol>
+    <li>This Events queues a letter in the print batch.</li>
+</p>
+  <blockquote>
+<p>  Type: Letter<br />
+  Description: Series 3 - Letter 1<br />
+  Assign to account operator<br />
+  Schedule immediately<br />
+  Prompt to confirm details<br />
+  Delete same type contacts<br />
+  Timeless
+</p>
+  </blockquote>
+    <li>This Event schedules a review in 14 days.</li>
+</p>
+  <blockquote>
+<p>  Type: Review<br />
+  Description: Letter sent recently. Any response?<br />
+  Assign to account operator<br />
+  Delay Days: Yes ...... Days: 14<br />
+  Priority: 25<br />
+  Prompt to confirm details<br />
+  Delete same type contacts<br />
+  Same description only<br />
+  Timeless
+</p>
+  </blockquote>  </ol>
+
+<p>  <h4>Review a File</h4>
+</p>
+<p>  This Contact Plan schedules a file review.
+</p>
+<p>  On the Contact Plan form, the following information is setup:
+</p>
+  <blockquote>
+<p>  Code: REV<br />
+  Description: Review
+</p>
+  </blockquote>
+<p>  The single Event in REV is as follows:
+</p>
+<p>  <ol>
+    <li>This Event schedules a review.</li>
+  </ol>
+</p>
+  <blockquote>
+<p>  Type: Review<br />
+  Description: Review file...<br />
+  Assign to account operator<br />
+  Schedule immediately<br />
+  Priority: 30<br />
+  Prompt to confirm details<br />
+  Delete same type contacts<br />
+  Timeless
+</p>
+  </blockquote>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="examplesusingcontactplans"></a>
+<h3>Examples Using Contact Plans</h3>
+
+<p>Now, let's try a few if these sample  <a href="contactplan.html">Contact plan</a>s.
+</p>
+<p>
+<img src="warning.gif" border="0" alt="Warning Note" />
+WARNING: For these exercises, please sign into Collect! as operator OWN. When you choose a Debtor
+             for one of the instructions, check the upper right hand corner of the Debtor form. The
+             Operator field should read OWN. This way, your results should match the results that are
+             described  in the examples.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ The following examples assume you are on a Debtor record. If you are not on a Debtor record,
+          pull down the  <a href="browsemenu.html">Browse menu</a>, choose Active Debtors and press F5, or click on the line item,
+          to open a Debtor.
+</p>
+<p>
+<img src="tip.gif" border="0" alt="Useful Note" />
+ Please press F1 for help regarding the  <a href="schedulenextcontact.html">Schedule Next Contact</a> form which is mentioned in a few
+         of these examples. It is advised that you do not type details into this form or press the
+         buttons on it until you know what they are for.
+</p>
+<p>  <h4>Scheduling Letters to  <a href="newbusiness.html">New Business</a></h4>
+</p>
+<p>  <ol>
+    <li>Either press F2 on the Action field, click your mouse, or press the Action button.</li>
+    <li>Type NEW in the Action field. Collect! quickly performs some actions "behind the scenes."</li>
+    <li>Select the Contacts tab on the Debtor form. Notice that several new letters and a phone call
+        are entered in this Debtor's Contact list. Notice the dates. You will see that they correspond
+        to the Delay Days that were set in the NEW BUSINESS Contact Plan described above. These contacts
+        will appear in the account operator's  <a href="todolist.html">To Do list</a> on the days that they are scheduled.</li>
+  </ol>
+</p>
+<p>  Collect! has automatically scheduled all the appropriate contacts for this Contact Plan. You can see
+  how this speeds up data entry and minimizes errors. Contact Plans provide a consistent, timely contact
+  strategy.
+</p>
+<p>  <h4>Scheduling a Call</h4>
+</p>
+<p>  <ol>
+    <li>Either press F2 on the Action field, click your mouse, or press Enter on the Action button.</li>
+    <li>Type the letter C and press Enter. The Schedule Next Contact form opens. This is because the
+        "Prompt to confirm details" switch is ON in the Event form for the Contact Plan whose Code is
+        C.</li>
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ You can easily verify this by opening the Contact Plan list. (Pull down  <a href="systemmenu.html">System menu</a>, choose
+           <a href="contactmanagementsettings.html">Contact Management Settings</a>, Contact Plans, View.)  Look for Code 'C' - Prompt to plan call.
+          Open this Contact Plan and click on the Event. You will now see that "Prompt to confirm details"
+          is checked. Whenever this is checked in an Event for a particular Contact Plan, the Schedule
+          Next Contact form will open when you type that Contact Plan's code into the Action field on
+          the Debtor form.
+</p>
+<p>
+<img src="tip.gif" border="0" alt="Useful Note" />
+ Find help on the Schedule Next Contact form by pressing F1. There you will find details about
+         the options and choices you have when this form is displayed.
+</p>
+<p>    <li>Fill in the details of the call you want to schedule. Select the Contacts tab and you will see
+        that the call has been added to the contacts list.</li>
+  </ol>
+</p>
+<p>  <h4>Scheduling a Letter</h4>
+</p>
+<p>  <ol>
+    <li>Either press F2 on the Action field, click your mouse, or press Enter on the Action button.</li>
+    <li>Type L1 and press Enter.</li>
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ If you refer back to the details of the SEND A LETTER Contact Plan described above, you will
+          notice that this Contact Plan also has an Event with "Prompt to confirm details" switched ON.
+          Therefore, the Schedule Next Contact form will open.
+</p>
+    <li>The letter will be printed in the  <a href="daily.html">daily</a> letter batch.</li>
+  </ol>
+</p>
+<p>
+<img src="tip.gif" border="0" alt="Useful Note" />
+ Find help on the Schedule Next Contact form by pressing F1. There you will find details about
+         the options and choices you have when this form is displayed.
+</p>
+<p>  <h4>Scheduling a Review</h4>
+</p>
+<p>  <ol>
+    <li>Either press F2 on the Action field, click your mouse, or press Enter on the Action button.</li>
+    <li>Type REV and press Enter.</li>
+    <li>When the Schedule Next Contact form displays, fill in the description of the review you want
+        to schedule and it will be added to the Debtor's contacts list.</li>
+  </ol>
+</p>
+<p>
+<img src="tip.gif" border="0" alt="Useful Note" />
+  You will find more help by pressing F1 in the Contact Plan form and also in the Event form.
+</p>
+<p>  <h4>Changing Debtor Commission Rate</h4>
+</p>
+<p>  When you enter new accounts from within the Debtors Tab in the Client Screen, the Rate field on each
+  Debtor entered here will be auto-populated from the rate which currently exists on the Client. If
+  there is no default rate entered into the Client Advanced Settings screen, this blank rate field will
+  be passed along to Debtors as they are entered.
+</p>
+<p>  It is possible to override and overwrite a blank or default rate field on the Debtor screen as a new
+  account is being entered if there is an exception reason why it would be necessary to be faced with
+  this chore. For the majority of the business you will enter for any one Client, it shouldn't be
+  necessary to be doing extra entry when the system is designed to save you steps.
+</p>
+<p>  There are a few commonplace Industry scenarios where you may find that you need to update significant
+  portions of your inventory with a new commission rate or rate plan.
+</p>
+<p>  <ol>
+    <li>A Client who normally assigns Retail only at a rate of 35% will now be sending you listings for
+        Commercial as well and you are to charge 45% on this stream of business.  This creates a
+        condition where the Type of assignment is becoming the determining factor in what will decision
+        the correct rate to charge on each account.</li>
+    <li>Your Agency has made a business decision to change its contingency rate for all Clients who
+        assign business of a specific Type, effective as of a designated date.</li>
+    <li>You have an individual Client with one or more Client numbers that has changed their rate as
+        of a specified date and wants this change to be applied to shelf inventory retroactively in
+        addition to what is being reflected as the current rate for new listings.</li>
+  </ol>
+</p>
+<p>
+<img src="warning.gif" border="0" alt="Warning Note" />
+WARNING: We recommend taking a Snapshot of your database before embarking on any large-scale
+             invasive auto-process.
+</p>
+<p>  The scenarios above which want a different rate entirely from the Client default for different reasons
+  and based on Debtor account Type can be best handled by adding an Event to the NEW Contact (Action)
+  Plan which tests for account Type and changes the commission rate on that basis from the default
+  Client value for to the new prescribed rate for the account Type.
+</p>
+<p>  Here are examples of the settings you would use on the inside of a Contact (Action) Plan to make the
+  change on the basis of the account Type code.
+</p>
+<p>  <img style="max-width:1500px;" src="dialogs/commissionevent1.png" alt="" />
+  <br /><strong>Plan Event to set Commission Rate to 45%</strong>
+</p>
+<p>  This event runs if the  <a href="picklist.html">Pick List</a> 'Type' is 2.  In this logic, the numeric representation of the
+  expressed "Commercial" type is being tested for and if found to be true, ONLY then does the system
+  update the commission rate on an account to 45%. Note as well that the fill value 45 is entered in
+  the Description field with no percent sign or decimal points.
+</p>
+<p>  The following is another example of the same decisioning using a different 'Type' Pick List numeric
+  to make the conditional logic test with.
+</p>
+<p>  <img style="max-width:1500px;" src="dialogs/commissionevent2.png" alt="" />
+  <br /><strong>Plan Event to set Commission Rate to 50%</strong>
+</p>
+<p>  This event runs if the 'Type' is 4.
+</p>
+<p>  To determine what your numeric value is for your 'Type' pick list selection, Right click on the Type
+  field and open the pick list by clicking into the field, then right-clicking.  This will pop up an
+   <a href="accessrights.html">Access Rights</a> window.  Next to the "Pick list file" field is a gray folder.  Click the folder to open
+  the pick list and determine what numeric value in your site's pick list match the criteria you will
+  be isolating by.
+</p>
+<p>  Adding an Event to your NEW account automation addresses part of the issue on a go forward basis.
+  To run against the whole database to identify and isolate accounts for this treatment, you need to
+  gather up the shelf inventory and if applicable, update all of their  <a href="commissionrates.html">Commission Rates</a>. If you are
+  able to segregate on the basis of Client, like in #1 above, then this Tag List creation can be done
+  from within a Client's Debtors tab.  If you need to sweep all Clients for a specific 'Type', the best
+  shelf inventory prospective will come from a Browse Active Debtors list.
+</p>
+<p>  The methodology is the same coming from a Client screen Debtors Tab or Browse Active Debtors list:
+</p>
+<p>  <ol>
+    <li>From the list, click <strong>Find</strong>.  When the  <a href="selectrecords.html">Search Criteria</a> window pops up, select
+        'Type' and pick from the drop-down menu to populate your From / To columns with the target
+        criterion.</li>
+    <li>Click <strong>Search</strong> in the lower right corner to Tag a list of qualifying accounts.</li>
+    <li>To properly gather your Tagged List, click <strong>Edit</strong> at the top of the screen, then
+        <strong>View Tags (or View All)</strong> - whichever message your running version shows you
+        for this purpose.</li>
+    <li>Create a new Contact Plan from the menu path "System\Contact\Management Settings\View Contact
+        Plans" and input your Rate Change Event.  This standalone Contact Plan will be run as a batch
+        process against your shelf inventory meeting the target criteria for update.</li>
+    <li>To run the created Contact Plan against all the accounts in the tagged list, click "Tools\Batch
+        Processing\Run Contact Plans".  Follow the prompts and select the Contact Plan designed for
+        this purpose and run it.</li>
+    <li>When asked to <strong>Untag</strong> your list after the process completes, initially say NO
+        so that you can spot-check a few to make sure the desired result was obtained.</li>
+    <li>After confirming that your rates on the target subset of accounts have updated correctly and
+    successfully, click <strong>Edit</strong> to Untag your list and <strong>Clear</strong> your search
+    criteria.</li>
+  </ol>
+</p>
+<p>  <h4>Reassigning an Account to a New Operator</h4>
+</p>
+<p>  This section steps you through creating a contact plan to reassign accounts to a different operator
+  based on debtor criteria. It requires familiarity with creating contact plans.
+</p>
+<p>  This example will assign accounts to <strong>JC</strong> based on the criterion
+  <strong>New York</strong>.
+</p>
+<p>
+<img src="note.gif" border="0" alt="Useful Note" />
+ Make sure that you have already set up an Operator form for the new operator you want to
+          assign to your accounts.
+</p>
+<p>  Please be aware that changing the Operator ID on an account also assigns any In Progress contacts to
+  the new Operator ID if they were assigned to the account's previous Operator. Contacts that are
+  Completed or assigned to a different Operator ID will not be affected.
+</p>
+<p>  The simplest way to reassign accounts is to simply open each account that you want to reassign and
+  select the new Operator ID from the pick list for the Operator field on the Debtor form. Another
+  method is using a contact plan. Please refer to How To Use Contact Plans if you are not familiar
+  with creating contact plans.
+</p>
+<p>  <ol>
+    <li>From the top menu bar, select Options and then  <a href="selectcontactplan.html">select Contact Plan</a>s from the drop-down choices.
+        This will display a sub-menu.</li>
+    <li>Select View to display the list of contact plans. Select the New button at the bottom of the
+        list or press F3 to create a new contact plan. This will open a blank Contact Plan form.</li>
+    <li>Type a unique 3 character name or number into the field labeled <strong>Code</strong>. Enter a
+        brief explanation in the field labeled <strong>Description</strong>.</li>
+    <li>Press F5 to activate the Events sub-form and select YES to create a new Event.</li>
+    <li>Select Operator from the pick list on the field labeled <strong>Type</strong>.</li>
+    <li>Select the radio button labeled <strong>Assign to specific operator</strong> so that a dot
+        appears in it. This makes the Operator field visible. Select the new Operator ID from the pick
+        list attached to the Operator field.</li>
+</p>
+<p>  For this example, select <strong>JC</strong> from the list.
+</p>
+<p>    <li>In the first field next to the label <strong>Schedule if</strong>, select the down arrow to
+        view the list of fields. Select the criterion you are going to use, or begin typing in the
+        field code, if you already know what it is.</li>
+    <li>In the second field enter the "If" condition that must be satisfied to use this criterion.</li>
+    <li>In the third field(s) enter the Value, or range of Values, to use when comparing fields to
+        see if they satisfy the condition.</li>
+</p>
+<p>  For this example, type in <strong>de.st</strong> in the first field, <strong>=</strong> in the second
+  field, and then <strong>NY</strong> or <strong>New York</strong> in third field (depending how your
+  states are entered.)
+</p>
+<p>  <img style="max-width:1500px;" src="dialogs/eventassignacctopif.png" alt="" />
+  <br /><strong>Operator Assignment Event based on State</strong>
+</p>
+<p>    <li>Select OK or press F8 to close the Operator Event and return to the Contact Plan form. It
+        should resemble the following screen shot.</li>
+</p>
+<p>  <img style="max-width:1500px;" src="dialogs/contactplanassignop.png" alt="" />
+  <br /><strong>Operator Assignment Contact Plan</strong>
+</p>
+<p>    <li>Select OK or press F8 to close the Contact Plan form and again to close the list of contact
+        plans.</li>
+  </ol>
+</p>
+<p>  There are several ways to run this contact plan.
+</p>
+<p>  <ol>
+    <li>This plan can be run on an account directly when you are viewing the account. Select the button
+        labeled <strong>Action</strong> and select the contact plan to run it.</li>
+    <li>Or, type the contact plan's Code into the small Action box to the right of the field labeled
+        <strong>Summary</strong>.</li>
+    <li>This plan can also be run through a batch process on specific accounts. Collect! will provide
+        a summary of how many accounts the plan ran on. Please see
+         <a href="howtobatchprocessusingcontactplans.html">How to Batch Process Using Contact Plans</a> for details.</li>
+  </ol>
+</p>
+<p>  Any In Progress contacts on these accounts for the previous operator will now show in the new
+  operator's  <a href="workinprogress.html">WIP list</a>.
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+
+<a name="summary"></a>
+<h3>Summary</h3>
+
+<p>  This article barely skims the surface of the possibilities available to you when you use Contact
+  Plans. To use them effectively requires a well thought-out collection strategy. As you know, there
+  are many possible outcomes of interactions with your Debtors and Clients. Many of them can be
+  anticipated and handled automatically with  <a href="contactplan.html">Contact Plan</a>s.
+</p>
+</p>
+<p><a href="#home"><img class="top" src="topofpage.gif" align="right" border="0" alt="Top of page." /></a>
+</p>
+<!-- End body text -->
+</td></tr></table>
+
+       <table style="width:100%">
+        <tr>
+          <td style="text-align:center;">
+            <div class="comment">
+              <p>
+                Was this page helpful? Do you have any comments on this document? Can we make it better? If so how may we improve this page. 
+              </p>
+              <p>
+                Please click this link to send us your comments:
+                <a href="mailto:helpinfo@collect.org?subject=Re:/cv13/Help/howtousecontactplans.html">helpinfo@collect.org</a>
+              </p>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+</td></tr></table>
+
+            
+          </td>
+        </tr> 
+      </table>
+      
+    </div><!--  id=pagecontent -->
+    <!-- end of the white Main Content box started in template-header -->
+
+
+
+    
+    <!-- Contact boxes and news -->
+    <div class="footer">
+        <p class="footer">Copyright &copy; 2026 <a class="footer" href="https://www.collect.org">Comtech Systems Inc.</a> All rights reserved. 
+         <a class="footer" href="https://www.collect.org/legal">Use of the Collect! system indicates acceptance of our product terms &bull; Legal Notices</a><br />
+         <a class="footer" href="https://www.collect.org/privacy">Use of the Collect! website indicates acceptance of our website terms</a><br /> 
+        This document and any attendant software and/or services subject to change without notice. 
+    </div>
+
+  </body> 
+  
+</html>
+

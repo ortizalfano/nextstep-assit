@@ -17,7 +17,8 @@ export const KnowledgeBase = () => {
     // State for URL Scraping
     const [urlInput, setUrlInput] = useState('');
     const [isScraping, setIsScraping] = useState(false);
-    const [crawlSubpages, setCrawlSubpages] = useState(false); // [NEW] Checkbox state
+    const [crawlSubpages, setCrawlSubpages] = useState(false);
+    const [scrapeResult, setScrapeResult] = useState<{ success: boolean; count?: number; pages?: string[]; error?: string } | null>(null);
 
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -331,6 +332,36 @@ export const KnowledgeBase = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Scrape Result Modal */}
+            {scrapeResult && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div className="bg-[#0F1924] border border-white/10 rounded-2xl p-6 max-w-sm w-full shadow-2xl scale-100 animate-in zoom-in-95 duration-200">
+                        <div className="flex flex-col items-center text-center space-y-4">
+                            <div className={`w-12 h-12 rounded-full flex items-center justify-center ${scrapeResult.success ? 'bg-mint-green/10 text-mint-green' : 'bg-red-500/10 text-red-400'}`}>
+                                {scrapeResult.success ? <CheckCircle2 size={24} /> : <Trash2 size={24} />}
+                            </div>
+
+                            <h3 className="text-xl font-bold text-white">
+                                {scrapeResult.success ? 'Indexing Complete' : 'Indexing Failed'}
+                            </h3>
+
+                            <p className="text-white/60 text-sm">
+                                {scrapeResult.success
+                                    ? `Successfully extracted content from ${scrapeResult.count} page(s). The AI is now training on this data.`
+                                    : scrapeResult.error}
+                            </p>
+
+                            <button
+                                onClick={closeScrapeModal}
+                                className="w-full py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg font-medium transition-colors"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
