@@ -30,16 +30,20 @@ function App() {
     }
   }, []);
 
-  // Handle Login with real User object from API
-  const handleLogin = (userData: User) => {
+  // Handle Login with real User object from API (updates App state)
+  const handleLogin = (userData: User, token?: string) => {
     setUser(userData);
     localStorage.setItem('nextstep_user', JSON.stringify(userData));
+    if (token) {
+      localStorage.setItem('nextstep_token', token);
+    }
   };
 
   const handleLogout = () => {
     setUser(null);
     setAuthView('login');
     localStorage.removeItem('nextstep_user');
+    localStorage.removeItem('nextstep_token');
   };
 
   const [lastUpdate, setLastUpdate] = useState(0);

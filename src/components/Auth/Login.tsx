@@ -3,7 +3,7 @@ import { Mail, Lock, ArrowRight, Loader } from 'lucide-react';
 import { api } from '../../lib/api';
 
 interface LoginProps {
-    onLogin: (user: any) => void;
+    onLogin: (user: any, token: string) => void;
     onSwitchToRegister: () => void;
 }
 
@@ -17,13 +17,7 @@ export const Login: React.FC<LoginProps> = ({ onLogin, onSwitchToRegister }) => 
         setIsLoading(true);
         try {
             const result = await api.auth.login(email, password);
-            // The API returns { user: ... } or just the user directly? 
-            // api/auth/register returns { user: ... }. Let's assume login matches.
-            // If login endpoint isn't implemented fully yet, we might get an error.
-            // But the user reported registering successfully, so register works.
-            // Does /api/auth/login exist? I haven't checked IT yet.
-            // Let's assume it returns { user: ... } like register.
-            onLogin(result.user || result);
+            onLogin(result.user, result.token);
         } catch (error) {
             console.error('Login failed:', error);
             alert('Login failed. Please check your credentials.');

@@ -2,6 +2,8 @@ import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 import { eq } from 'drizzle-orm';
+import bcrypt from 'bcryptjs';
+import { SignJWT } from 'jose';
 
 // Define Schema Locally
 const users = pgTable("users", {
@@ -13,6 +15,8 @@ const users = pgTable("users", {
     role: text("role").default("user").notNull(),
     avatar_url: text("avatar_url"),
 });
+
+const SECRET_KEY = process.env.JWT_SECRET || 'dev_secret_key_change_me_in_prod';
 
 export default async function handler(req: any, res: any) {
     // CORS Headers
@@ -41,12 +45,44 @@ export default async function handler(req: any, res: any) {
         const userResult = await db.select().from(users).where(eq(users.email, email)).limit(1);
         const user = userResult[0];
 
-        // Check password (In real app, compare hash)
-        if (!user || user.password_hash !== password) {
+        if (!user) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        // Return user data including role
+        // Verify password (Handle Legacy Plain Text + BCrypt)
+        let isValid = false;
+        let needsRehash = false;
+
+        // 1. Try bcrypt compare
+        if (user.password_hash.startsWith('$2')) {
+            isValid = await bcrypt.compare(password, user.password_hash);
+        } else {
+            // 2. Fallback: Compare Plain text (legacy)
+            if (user.password_hash === password) {
+                isValid = true;
+                needsRehash = true;
+            }
+        }
+
+        if (!isValid) {
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
+
+        // 3. Migration: Update raw password to hash if it was a legacy match
+        if (needsRehash) {
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(password, salt);
+            await db.update(users).set({ password_hash: hashedPassword }).where(eq(users.id, user.id));
+        }
+
+        // Generate JWT
+        const token = await new SignJWT({ userId: user.id, role: user.role })
+            .setProtectedHeader({ alg: 'HS256' })
+            .setIssuedAt()
+            .setExpirationTime('24h')
+            .sign(new TextEncoder().encode(SECRET_KEY));
+
+        // Return user data including role and new token
         return res.status(200).json({
             user: {
                 id: user.id,
@@ -54,7 +90,8 @@ export default async function handler(req: any, res: any) {
                 email: user.email,
                 role: user.role,
                 avatar_url: user.avatar_url
-            }
+            },
+            token
         });
 
     } catch (error: any) {

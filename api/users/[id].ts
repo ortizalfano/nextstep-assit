@@ -2,6 +2,7 @@ import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 import { eq } from 'drizzle-orm';
+import { jwtVerify } from 'jose';
 
 // Define Schema Locally
 const users = pgTable("users", {
@@ -14,14 +15,40 @@ const users = pgTable("users", {
     avatar_url: text("avatar_url"),
 });
 
+const SECRET_KEY = process.env.JWT_SECRET || 'dev_secret_key_change_me_in_prod';
+
 export default async function handler(req: any, res: any) {
     // CORS Headers
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
     if (req.method === 'OPTIONS') {
         return res.status(200).end();
+    }
+
+    // Verify Token
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Unauthorized: Missing token' });
+    }
+
+    const token = authHeader.split(' ')[1];
+    let userPayload;
+    try {
+        const { payload } = await jwtVerify(token, new TextEncoder().encode(SECRET_KEY));
+        userPayload = payload;
+    } catch (err) {
+        return res.status(401).json({ error: 'Unauthorized: Invalid token' });
+    }
+
+    // RBAC: Only admins can manage other users
+    // (Optional: Users could edit themselves, but typically admin manages all in this context, or we check if userPayload.userId === id. 
+    // For simplicity given the request context about "admin privileges", we enforce admin only for now to be safe, or allow self-edit if needed. 
+    // The prompt implied securing against unauthorized access. Let's restrict to Admin for now as the dashboard functionality implies admin user management.)
+    if (userPayload.role !== 'admin') {
+        // Allow self-edit? Maybe. sticking to strict Admin for security request.
+        return res.status(403).json({ error: 'Forbidden: Admins only' });
     }
 
     const { id } = req.query;

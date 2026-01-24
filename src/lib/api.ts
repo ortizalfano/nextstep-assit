@@ -3,6 +3,14 @@
 
 const API_BASE = '/api';
 
+const getAuthHeaders = () => {
+    const token = localStorage.getItem('nextstep_token');
+    return {
+        'Content-Type': 'application/json',
+        ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+    };
+};
+
 export const api = {
     auth: {
         login: async (email: string, password?: string) => {
@@ -40,14 +48,16 @@ export const api = {
     },
     users: {
         list: async () => {
-            const res = await fetch(`${API_BASE}/users`);
+            const res = await fetch(`${API_BASE}/users`, {
+                headers: getAuthHeaders()
+            });
             if (!res.ok) throw new Error('Failed to fetch users');
             return res.json();
         },
         create: async (userData: any) => {
             const res = await fetch(`${API_BASE}/users`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: getAuthHeaders(),
                 body: JSON.stringify(userData)
             });
             if (!res.ok) {
@@ -59,7 +69,7 @@ export const api = {
         update: async (id: number, updates: any) => {
             const res = await fetch(`${API_BASE}/users/${id}`, {
                 method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
+                headers: getAuthHeaders(),
                 body: JSON.stringify(updates)
             });
             if (!res.ok) throw new Error('Failed to update user');
@@ -67,7 +77,8 @@ export const api = {
         },
         delete: async (id: number) => {
             const res = await fetch(`${API_BASE}/users/${id}`, {
-                method: 'DELETE'
+                method: 'DELETE',
+                headers: getAuthHeaders()
             });
             if (!res.ok) throw new Error('Failed to delete user');
             return res.json();

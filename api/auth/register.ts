@@ -2,6 +2,8 @@ import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 import { eq } from 'drizzle-orm';
+import bcrypt from 'bcryptjs';
+import { SignJWT } from 'jose';
 
 // Define Schema Locally to avoid import resolution issues in Serverless limits
 const users = pgTable("users", {
@@ -13,6 +15,8 @@ const users = pgTable("users", {
     role: text("role").default("user").notNull(),
     avatar_url: text("avatar_url"),
 });
+
+const SECRET_KEY = process.env.JWT_SECRET || 'dev_secret_key_change_me_in_prod';
 
 export default async function handler(req: any, res: any) {
     // CORS Headers just in case (though usually handled by Vercel for same origin)
@@ -48,23 +52,37 @@ export default async function handler(req: any, res: any) {
             return res.status(409).json({ error: 'User already exists' });
         }
 
+        // Hash password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
         // Create user
         const newUser = await db.insert(users).values({
             name,
             email,
-            password_hash: password, // In a real app, hash this password!
+            password_hash: hashedPassword,
             role: 'user',
             avatar_url: `https://ui-avatars.com/api/?name=${name}&background=random`
         }).returning();
 
+        const user = newUser[0];
+
+        // Generate JWT
+        const token = await new SignJWT({ userId: user.id, role: user.role })
+            .setProtectedHeader({ alg: 'HS256' })
+            .setIssuedAt()
+            .setExpirationTime('24h')
+            .sign(new TextEncoder().encode(SECRET_KEY));
+
         return res.status(201).json({
             user: {
-                id: newUser[0].id,
-                name: newUser[0].name,
-                email: newUser[0].email,
-                role: newUser[0].role,
-                avatar_url: newUser[0].avatar_url
-            }
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                avatar_url: user.avatar_url
+            },
+            token
         });
 
     } catch (error: any) {

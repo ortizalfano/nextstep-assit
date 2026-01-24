@@ -4,7 +4,7 @@ import { AccountRequestModal } from './AccountRequestModal';
 import { api } from '../../lib/api';
 
 interface RegisterProps {
-    onRegister: (user: any) => void;
+    onRegister: (user: any, token: string) => void;
     onSwitchToLogin: () => void;
 }
 
@@ -27,7 +27,7 @@ export const Register: React.FC<RegisterProps> = ({ onRegister, onSwitchToLogin 
         setIsLoading(true);
         try {
             const result = await api.auth.register({ name, email, password });
-            onRegister(result.user);
+            onRegister(result.user, result.token);
         } catch (error: any) {
             console.error('Registration failed:', error);
             alert(`Registration failed: ${error.message || 'Please try again'}`);

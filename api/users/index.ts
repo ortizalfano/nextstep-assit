@@ -2,6 +2,8 @@ import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
 import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 import { eq, desc } from 'drizzle-orm';
+import { jwtVerify } from 'jose';
+import bcrypt from 'bcryptjs';
 
 // Define Schema Locally
 const users = pgTable("users", {
@@ -14,14 +16,36 @@ const users = pgTable("users", {
     avatar_url: text("avatar_url"),
 });
 
+const SECRET_KEY = process.env.JWT_SECRET || 'dev_secret_key_change_me_in_prod';
+
 export default async function handler(req: any, res: any) {
     // CORS Headers
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
     if (req.method === 'OPTIONS') {
         return res.status(200).end();
+    }
+
+    // Verify Token for ALL requests to this endpoint
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ error: 'Unauthorized: Missing token' });
+    }
+
+    const token = authHeader.split(' ')[1];
+    let userPayload;
+    try {
+        const { payload } = await jwtVerify(token, new TextEncoder().encode(SECRET_KEY));
+        userPayload = payload;
+    } catch (err) {
+        return res.status(401).json({ error: 'Unauthorized: Invalid token' });
+    }
+
+    // RBAC: Only admins can list or create users
+    if (userPayload.role !== 'admin') {
+        return res.status(403).json({ error: 'Forbidden: Admins only' });
     }
 
     try {
@@ -62,11 +86,15 @@ export default async function handler(req: any, res: any) {
                 return res.status(409).json({ error: 'User already exists' });
             }
 
+            // Hash password
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(password, salt);
+
             // Create user
             const newUser = await db.insert(users).values({
                 name,
                 email,
-                password_hash: password, // In real app: hash this!
+                password_hash: hashedPassword,
                 role: role || 'user',
                 avatar_url: `https://ui-avatars.com/api/?name=${name}&background=random`
             }).returning();
