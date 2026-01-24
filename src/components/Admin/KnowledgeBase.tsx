@@ -64,6 +64,8 @@ export const KnowledgeBase = () => {
         setIsSavingKey(true);
         try {
             const token = localStorage.getItem('nextstep_token');
+            console.log("Debug: Sending request with token:", token ? "Present" : "Missing"); // Debug Log
+
             const res = await fetch('/api/knowledge/config', {
                 method: 'POST',
                 headers: {
