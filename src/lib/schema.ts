@@ -1,3 +1,4 @@
+
 import { pgTable, serial, text, timestamp, integer, jsonb } from 'drizzle-orm/pg-core';
 
 export const users = pgTable("users", {
@@ -50,4 +51,17 @@ export const comments = pgTable("comments", {
     ticket_id: integer("ticket_id").references(() => tickets.id).notNull(),
     user_id: integer("user_id").references(() => users.id).notNull(),
     content: text("content").notNull(),
+});
+
+export const documents = pgTable("documents", {
+    id: serial("id").primaryKey(),
+    filename: text("filename").notNull(),
+    content: text("content").notNull(), // Extracted text
+    status: text("status").default('indexing').notNull(), // 'indexing' | 'ready' | 'error'
+    created_at: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const app_config = pgTable("app_config", {
+    key: text("key").primaryKey(), // e.g., 'gemini_api_key'
+    value: text("value").notNull(),
 });
