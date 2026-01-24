@@ -59,6 +59,8 @@ export const documents = pgTable("documents", {
     content: text("content").notNull(), // Extracted text
     status: text("status").default('indexing').notNull(), // 'indexing' | 'ready' | 'error'
     created_at: timestamp("created_at").defaultNow().notNull(),
+    type: text("type").default('pdf').notNull(), // 'pdf' | 'url'
+    url: text("url"), // Optional, only for type='url'
 });
 
 export const app_config = pgTable("app_config", {

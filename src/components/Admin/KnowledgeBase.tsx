@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Settings, Upload, FileText, CheckCircle2, Eye, EyeOff, Save, Loader, Trash2 } from 'lucide-react';
+import { Settings, Upload, FileText, CheckCircle2, Eye, EyeOff, Save, Loader, Trash2, Globe, Link } from 'lucide-react';
 
 export const KnowledgeBase = () => {
     // State for API Key
@@ -10,9 +10,13 @@ export const KnowledgeBase = () => {
     const [configLoaded, setConfigLoaded] = useState(false);
 
     // State for Files
-    const [files, setFiles] = useState<{ id: number; filename: string; status: 'indexing' | 'ready' | 'error'; size?: string }[]>([]);
+    const [files, setFiles] = useState<{ id: number; filename: string; status: 'indexing' | 'ready' | 'error'; size?: string; type?: 'pdf' | 'url'; url?: string }[]>([]);
     const [isLoadingFiles, setIsLoadingFiles] = useState(true);
     const [isUploading, setIsUploading] = useState(false);
+
+    // State for URL Scraping
+    const [urlInput, setUrlInput] = useState('');
+    const [isScraping, setIsScraping] = useState(false);
 
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -24,8 +28,6 @@ export const KnowledgeBase = () => {
 
     const fetchConfig = async () => {
         try {
-            // We need to add a method to api.ts or just fetch here directly using the token we have in localStorage
-            // For expediency, I'll direct fetch here, but ideally we add to api.ts
             const token = localStorage.getItem('nextstep_token');
             const res = await fetch('/api/knowledge/config', {
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -121,8 +123,34 @@ export const KnowledgeBase = () => {
         }
     };
 
+    const handleUrlScrape = async () => {
+        if (!urlInput.trim()) return;
+        setIsScraping(true);
+        try {
+            const token = localStorage.getItem('nextstep_token');
+            const res = await fetch('/api/knowledge/scrape', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ url: urlInput })
+            });
+
+            if (!res.ok) throw new Error('Scrape failed');
+
+            setUrlInput('');
+            await fetchFiles();
+        } catch (e) {
+            console.error(e);
+            alert('Failed to index website. Make sure the URL is accessible.');
+        } finally {
+            setIsScraping(false);
+        }
+    };
+
     const handleDeleteFile = async (id: number) => {
-        if (!confirm('Are you sure you want to delete this document?')) return;
+        if (!confirm('Are you sure you want to delete this item?')) return;
         try {
             const token = localStorage.getItem('nextstep_token');
             await fetch('/api/knowledge?id=' + id, {
@@ -196,51 +224,77 @@ export const KnowledgeBase = () => {
 
                 {/* Right Column: Training Data */}
                 <div className="lg:col-span-2 space-y-6">
-                    {/* Upload Area */}
-                    <div
-                        onClick={() => fileInputRef.current?.click()}
-                        className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 border-dashed border-white/20 hover:border-white/40 transition-colors cursor-pointer group text-center"
-                    >
-                        <input
-                            type="file"
-                            ref={fileInputRef}
-                            className="hidden"
-                            accept=".pdf"
-                            onChange={handleFileUpload}
-                        />
-                        <div className="w-16 h-16 rounded-full bg-indigo-500/10 flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300">
-                            {isUploading ? <Loader size={32} className="text-indigo-400 animate-spin" /> : <Upload size={32} className="text-indigo-400" />}
+                    {/* Input Sources Tabs or Split */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {/* PDF Upload */}
+                        <div
+                            onClick={() => fileInputRef.current?.click()}
+                            className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 border-dashed border-white/20 hover:border-white/40 transition-colors cursor-pointer group text-center flex flex-col items-center justify-center min-h-[200px]"
+                        >
+                            <input
+                                type="file"
+                                ref={fileInputRef}
+                                className="hidden"
+                                accept=".pdf"
+                                onChange={handleFileUpload}
+                            />
+                            <div className="w-12 h-12 rounded-full bg-indigo-500/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                {isUploading ? <Loader size={24} className="text-indigo-400 animate-spin" /> : <Upload size={24} className="text-indigo-400" />}
+                            </div>
+                            <h4 className="font-medium text-white mb-1">Upload PDF Document</h4>
+                            <p className="text-white/40 text-xs">Drag & drop or click to select</p>
                         </div>
-                        <h4 className="text-lg font-medium text-white mb-2">{isUploading ? 'Uploading & Indexing...' : 'Upload Training Documents'}</h4>
-                        <p className="text-white/40 text-sm max-w-sm mx-auto mb-6">
-                            Drag and drop PDF files here, or click to browse. These files will be indexed for the chatbot context.
-                        </p>
-                        <button className="px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm font-medium transition-colors">
-                            Select Files
-                        </button>
+
+                        {/* Website Scraping */}
+                        <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex flex-col justify-center min-h-[200px]">
+                            <div className="w-12 h-12 rounded-full bg-pink-500/10 flex items-center justify-center mb-4 mx-auto">
+                                <Globe size={24} className="text-pink-400" />
+                            </div>
+                            <h4 className="font-medium text-white text-center mb-4">Add Website Source</h4>
+                            <div className="space-y-2">
+                                <input
+                                    value={urlInput}
+                                    onChange={(e) => setUrlInput(e.target.value)}
+                                    placeholder="https://example.com/about"
+                                    className="w-full bg-[#0F1924] border border-white/10 rounded-lg py-2 px-3 text-white placeholder-white/20 text-xs focus:outline-none focus:border-pink-500/50"
+                                />
+                                <button
+                                    onClick={handleUrlScrape}
+                                    disabled={isScraping || !urlInput.trim()}
+                                    className="w-full py-2 bg-pink-500/10 hover:bg-pink-500/20 text-pink-400 border border-pink-500/20 rounded-lg text-xs font-medium transition-colors flex items-center justify-center gap-2"
+                                >
+                                    {isScraping ? <Loader size={12} className="animate-spin" /> : <Link size={12} />}
+                                    {isScraping ? 'Indexing...' : 'Index Website'}
+                                </button>
+                            </div>
+                        </div>
                     </div>
 
                     {/* File List */}
                     <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden">
                         <div className="p-4 border-b border-white/5 bg-white/5 flex justify-between items-center">
-                            <h3 className="font-medium text-white text-sm">Indexed Documents ({files.length})</h3>
+                            <h3 className="font-medium text-white text-sm">Indexed Content ({files.length})</h3>
                             <span className="text-xs text-mint-green bg-mint-green/10 px-2 py-1 rounded border border-mint-green/20">System Online</span>
                         </div>
                         <div className="divide-y divide-white/5">
                             {isLoadingFiles ? (
-                                <div className="p-8 text-center text-white/20 text-sm">Loading documents...</div>
+                                <div className="p-8 text-center text-white/20 text-sm">Loading content...</div>
                             ) : files.length === 0 ? (
-                                <div className="p-8 text-center text-white/20 text-sm">No documents uploaded yet.</div>
+                                <div className="p-8 text-center text-white/20 text-sm">No knowledge sources added yet.</div>
                             ) : (
                                 files.map((file) => (
                                     <div key={file.id} className="p-4 flex items-center justify-between hover:bg-white/5 transition-colors">
                                         <div className="flex items-center gap-3">
-                                            <div className="p-2 rounded bg-[#1A2B3C] border border-white/10">
-                                                <FileText size={20} className="text-white/60" />
+                                            <div className={`p-2 rounded border ${file.type === 'url' ? 'bg-pink-500/10 border-pink-500/20' : 'bg-[#1A2B3C] border-white/10'}`}>
+                                                {file.type === 'url' ? <Globe size={20} className="text-pink-400" /> : <FileText size={20} className="text-white/60" />}
                                             </div>
                                             <div>
-                                                <p className="text-sm font-medium text-white">{file.filename}</p>
-                                                {/* <p className="text-xs text-white/30">{file.size || 'Unknown size'}</p> */}
+                                                <p className="text-sm font-medium text-white truncate max-w-[200px] sm:max-w-md">{file.filename}</p>
+                                                {file.type === 'url' && (
+                                                    <a href={file.url} target="_blank" rel="noopener noreferrer" className="text-[10px] text-pink-400/60 hover:text-pink-400 flex items-center gap-1">
+                                                        {file.url} <Link size={8} />
+                                                    </a>
+                                                )}
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-2">
