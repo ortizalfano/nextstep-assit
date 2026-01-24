@@ -17,6 +17,7 @@ export const KnowledgeBase = () => {
     // State for URL Scraping
     const [urlInput, setUrlInput] = useState('');
     const [isScraping, setIsScraping] = useState(false);
+    const [crawlSubpages, setCrawlSubpages] = useState(false); // [NEW] Checkbox state
 
     const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -44,6 +45,7 @@ export const KnowledgeBase = () => {
 
     const fetchFiles = async () => {
         try {
+            setIsLoadingFiles(true); // Ensure loading state shows
             const token = localStorage.getItem('nextstep_token');
             const res = await fetch('/api/knowledge', {
                 headers: { 'Authorization': `Bearer ${token}` }
@@ -134,13 +136,20 @@ export const KnowledgeBase = () => {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify({ url: urlInput })
+                body: JSON.stringify({
+                    url: urlInput,
+                    crawl: crawlSubpages // Pass the checkbox value
+                })
             });
 
             if (!res.ok) throw new Error('Scrape failed');
 
+            const data = await res.json();
+            alert(`Success! Indexed ${data.count} pages.`);
+
             setUrlInput('');
-            await fetchFiles();
+            setCrawlSubpages(false);
+            await fetchFiles(); // Auto-refresh logic
         } catch (e) {
             console.error(e);
             alert('Failed to index website. Make sure the URL is accessible.');

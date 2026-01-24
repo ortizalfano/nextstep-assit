@@ -41,25 +41,26 @@ export default async function handler(req: any, res: any) {
         const db = drizzle(sql, { schema: { documents } });
 
         if (req.method === 'GET') {
-            id: documents.id,
+            const docs = await db.select({
+                id: documents.id,
                 filename: documents.filename,
-                    status: documents.status,
-                        created_at: documents.created_at,
-                            type: documents.type,
-                                url: documents.url,
+                status: documents.status,
+                created_at: documents.created_at,
+                type: documents.type,
+                url: documents.url,
             }).from(documents).orderBy(desc(documents.created_at));
-        return res.status(200).json(docs);
-    }
+            return res.status(200).json(docs);
+        }
 
         if (req.method === 'DELETE') {
-        const { id } = req.query;
-        if (!id) return res.status(400).json({ error: 'ID required' });
-        await db.delete(documents).where(eq(documents.id, Number(id)));
-        return res.status(200).json({ success: true });
-    }
+            const { id } = req.query;
+            if (!id) return res.status(400).json({ error: 'ID required' });
+            await db.delete(documents).where(eq(documents.id, Number(id)));
+            return res.status(200).json({ success: true });
+        }
 
-} catch (error: any) {
-    console.error('Knowledge API Error:', error);
-    return res.status(500).json({ error: error.message });
-}
+    } catch (error: any) {
+        console.error('Knowledge API Error:', error);
+        return res.status(500).json({ error: error.message });
+    }
 }
